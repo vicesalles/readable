@@ -1,18 +1,22 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Route, Switch, withRouter } from 'react-router-dom';
+import Default from './layouts/Default';
+import Category from './layouts/Category';
+import Post from './layouts/Post';
+import Edit from './layouts/Edit';
+import Broken from './layouts/Broken';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div class="container-fluid">
+        <Switch>
+          <Route path="/" exact component={Default} />
+          <Route path="/category/:id" component={Category} />
+          <Route path="/post/:id" component={Post} />
+          <Route path="/edit/:id" component={Edit} />
+          <Route component={Broken} />
+        </Switch>
       </div>
     );
   }

@@ -1,0 +1,9 @@
+.pillbutton {
+    text-decoration: none;
+    color: white;
+}
+
+.pillbutton:hover {
+    text-decoration: none;
+    color: yellow;
+}
