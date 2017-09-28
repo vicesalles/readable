@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Header from '../components/Header';
 import CategoriesCard from '../components/categories/CategoriesCard';
-import TopPosts from '../components/topPosts/TopPosts';
+import TopPosts from '../components/Posts/TopPosts';
 
 
 export default class Default extends Component {
