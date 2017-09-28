@@ -17,6 +17,9 @@ class App extends Component {
           <Route path="/edit/:id" component={Edit} />
           <Route component={Broken} />
         </Switch>
+        <div className="container">
+            <div className="cont">&nbsp;</div>
+        </div>
       </div>
     );
   }
