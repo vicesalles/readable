@@ -13,7 +13,7 @@ export default class Header extends Component {
                     <p className="lead">
                         <Link to="/"><a className="btn btn-success btn-lg" href="./index.html" role="button">Home</a></Link>
                         &nbsp;
-                        <Link to="/edit/new"><a className="btn btn-success btn-lg" href="./post.html" role="button">New Post</a></Link>
+                        <Link className="btn btn-success btn-lg" to="/edit/new">New Post</Link>
                     </p>
                 </div>
             </div>

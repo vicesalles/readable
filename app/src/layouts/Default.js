@@ -14,11 +14,9 @@ export default class Default extends Component {
                     <CategoriesCard />
                     <TopPosts />
                 </div>
-                <div className="container">
-                    <div className="cont">&nbsp;</div>
-                </div>
-                <div className="row">
-                    <AllThePosts />
+              
+                <div className="row row-space">
+                    <AllThePosts title="All the Posts" />
                 </div>
             </div>
         );
