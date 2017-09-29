@@ -3,6 +3,7 @@ import Header from '../components/Header';
 import FullPost from '../components/Posts/FullPost';
 import CategoriesCard from '../components/categories/CategoriesCard';
 import TopPosts from '../components/Posts/TopPosts';
+import Comments from '../components/Comments/Comments';
 
 export default class Post extends Component {
     render() {
@@ -10,7 +11,7 @@ export default class Post extends Component {
             <Header />
             <FullPost />
             <div className="row row-space">
-            
+            <Comments/>
             </div>
             <div className="row row-space">
                 <CategoriesCard />
