@@ -18,7 +18,7 @@ export default class AllThePosts extends Component {
                     <div className="card-header">
                         <div className="row">
                             <div className="col">
-                                <h4>All the Posts</h4>
+                                <h4>{this.props.title}</h4>
                             </div>
                             <div className="col">
                                 <ul className="nav nav-pills card-header-pills">
