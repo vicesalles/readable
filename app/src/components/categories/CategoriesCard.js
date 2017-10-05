@@ -11,7 +11,9 @@ export default class CategoriesCard extends Component{
                     </div>
                     <ul className="list-group list-group-flush">
                 
-                        <CategoriesItem text="Bob" to="bob"/>
+                        <CategoriesItem text="React" to="react"/>
+                        <CategoriesItem text="Redux" to="redux"/>
+                        <CategoriesItem text="Udacity" to="udacity"/>                        
 
                       </ul>
                 </div>
