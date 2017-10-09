@@ -11,3 +11,7 @@
 .row-space{
     margin-top:2em;
 }
+
+.capital{
+    text-transform: capitalize;
+}
