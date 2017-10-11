@@ -9,7 +9,7 @@ import Broken from './layouts/Broken';
 class App extends Component {
   render() {
     return (
-      <div class="container-fluid">
+      <div className="container-fluid">
         <Switch>
           <Route path="/" exact component={Default} />
           <Route path="/category/:id" component={Category} />
