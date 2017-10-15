@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Post from './Post';
+import { connect } from 'react-redux';
 
 export default class TopPosts extends Component {
     

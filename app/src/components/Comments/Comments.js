@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import CommentsItem from './CommentsItem';
+import { connect } from 'react-redux';
 
 export default class Comments extends Component {
     render() {
@@ -12,7 +13,7 @@ export default class Comments extends Component {
                     </ul>
                     <div className="card-body">
                         <div className="row">
-                            <a className="btn btn-success btn-lg" href="#" role="button">Comment</a>
+                            <a className="btn btn-success btn-lg" role="button">Comment</a>
                         </div>
                     </div>
 

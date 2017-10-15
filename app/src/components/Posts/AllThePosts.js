@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import Post from './Post';
+import { connect } from 'react-redux';
+import * as api from '../../utils/api';
 
-export default class AllThePosts extends Component {
+class AllThePosts extends Component {
 
     example = {
         title: "Is Bruno legit?",
@@ -9,6 +11,48 @@ export default class AllThePosts extends Component {
         category: "bob",
         date: "17:14 1/10/17",
         votes: "15"
+    }
+
+    state = {
+        posts: [<Post key={this.example.id} post={this.example}/>]
+    }
+
+
+
+    getPosts = (q = "") => {
+        /*   api.getPosts(q).then((posts) => {
+   
+               let thePosts = posts.map((post) => <Post post={post} />);
+   
+               this.setState({ thePosts });
+           });*/
+        return [{
+            "8xf0y6ziyjabvozdd253nd": {
+                id: '8xf0y6ziyjabvozdd253nd',
+                timestamp: 1467166872634,
+                title: 'Udacity is the best place to learn React',
+                body: 'Everyone says so after all.',
+                author: 'thingtwo',
+                category: 'react',
+                voteScore: 6,
+                deleted: false
+            },
+            "6ni6ok3ym7mf1p33lnez": {
+                id: '6ni6ok3ym7mf1p33lnez',
+                timestamp: 1468479767190,
+                title: 'Learn Redux in 10 minutes!',
+                body: 'Just kidding. It takes more than 10 minutes to learn technology.',
+                author: 'thingone',
+                category: 'redux',
+                voteScore: -5,
+                deleted: false
+            }
+        }]
+    }
+
+    componentDidMount() {
+        console.log(this.props.category);
+        this.getPosts(this.props.category);
     }
 
     render() {
@@ -23,12 +67,12 @@ export default class AllThePosts extends Component {
                             <div className="col">
                                 <ul className="nav nav-pills card-header-pills">
                                     <li className="nav-item">
-                                        <a className="nav-link active" href="#">Popular
+                                        <a className="nav-link active">Popular
                                                 <span className="badge badge-secondary">up</span>
                                         </a>
                                     </li>
                                     <li className="nav-item">
-                                        <a className="nav-link" href="#">Old
+                                        <a className="nav-link">Old
                                                 <span className="badge badge-secondary">up</span></a>
                                     </li>
 
@@ -36,16 +80,14 @@ export default class AllThePosts extends Component {
                             </div>
                         </div>
 
-
                     </div>
 
-
                     <ul className="list-group list-group-flush">
-                        <Post post={this.example}/>
+                        {this.state.posts}
                     </ul>
                     <div className="card-body">
                         <div className="container">
-                            <a href="#" className="btn btn-success">Comment Now</a>
+                            <a className="btn btn-success">Comment Now</a>
                         </div>
                     </div>
                 </div>
@@ -54,3 +96,14 @@ export default class AllThePosts extends Component {
         )
     }
 }
+
+function mapStateToProps({post,comment}){
+    console.log(post);
+    return{}
+}
+
+function mapDispatchToProps(){
+    return{}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AllThePosts);

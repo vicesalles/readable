@@ -10,9 +10,9 @@ export default class CommentsItem extends Component {
                 <div className="row">
                     <div className="container">
                         <span>
-                            <span className="badge badge-success"><a href="#" className="pillbutton">UpVote</a></span>
+                            <span className="badge badge-success"><a className="pillbutton">UpVote</a></span>
                             &nbsp;
-                            <span className="badge badge-danger"> <a href="#" className="pillbutton">downVote</a></span>
+                            <span className="badge badge-danger"> <a className="pillbutton">downVote</a></span>
                             &nbsp;
                             <span className="badge badge-info">{this.props.votes || 'n'} Votes</span>
                             &nbsp;
@@ -20,9 +20,9 @@ export default class CommentsItem extends Component {
                         </span>
                         |
                     <span>
-                            <span className="badge badge-success"><a href="#" className="pillbutton">Edit</a></span>
+                            <span className="badge badge-success"><a className="pillbutton">Edit</a></span>
                             &nbsp;
-                            <span className="badge badge-danger"> <a href="#" className="pillbutton">delete</a></span>
+                            <span className="badge badge-danger"> <a className="pillbutton">delete</a></span>
 
                         </span>
 
