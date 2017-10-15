@@ -15,7 +15,7 @@ export default class Post extends Component {
 
                         <span className="badge badge-primary">{this.props.post.category}</span>
                         &nbsp;
-                        <span className="badge badge-info">{this.props.post.votes} Votes</span>
+                        <span className="badge badge-info">{this.props.post.voteScore} Votes</span>
                         <span className="badge badge-light">{this.props.post.date}</span>
 
                     </div>
@@ -24,3 +24,4 @@ export default class Post extends Component {
         )
     }
 }
+

@@ -1,58 +1,40 @@
 import React, { Component } from 'react';
 import Post from './Post';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { getPosts } from '../../actions';
 import * as api from '../../utils/api';
 
 class AllThePosts extends Component {
 
-    example = {
-        title: "Is Bruno legit?",
-        id: "44",
-        category: "bob",
-        date: "17:14 1/10/17",
-        votes: "15"
-    }
+    state = {}
 
-    state = {
-        posts: [<Post key={this.example.id} post={this.example}/>]
-    }
+    /**
+     * This method returns a properly parsed array of 'Post' Components
+     * @param answer array
+     * @return array of post components
+     */
+    parsePosts = (answer) => {
 
+        //Turning the response Object into an Array
+        const array = Object.values(answer);
+        //Turning the resulting objects array into a Post Component Array
+        return array.map((post) => {
+            return <Post key={post.id} post={post} />
+        });
+
+    }
 
 
     getPosts = (q = "") => {
-        /*   api.getPosts(q).then((posts) => {
-   
-               let thePosts = posts.map((post) => <Post post={post} />);
-   
-               this.setState({ thePosts });
-           });*/
-        return [{
-            "8xf0y6ziyjabvozdd253nd": {
-                id: '8xf0y6ziyjabvozdd253nd',
-                timestamp: 1467166872634,
-                title: 'Udacity is the best place to learn React',
-                body: 'Everyone says so after all.',
-                author: 'thingtwo',
-                category: 'react',
-                voteScore: 6,
-                deleted: false
-            },
-            "6ni6ok3ym7mf1p33lnez": {
-                id: '6ni6ok3ym7mf1p33lnez',
-                timestamp: 1468479767190,
-                title: 'Learn Redux in 10 minutes!',
-                body: 'Just kidding. It takes more than 10 minutes to learn technology.',
-                author: 'thingone',
-                category: 'redux',
-                voteScore: -5,
-                deleted: false
-            }
-        }]
+        api.getPosts(q).then((res) => { return res.json() }).then((posts) => {           
+            const category = this.props.match.params.id;                  
+            this.props.setPosts({ category, posts });
+        });
     }
 
     componentDidMount() {
-        console.log(this.props.category);
-        this.getPosts(this.props.category);
+        this.getPosts(this.props.match.params.id || "");       
     }
 
     render() {
@@ -83,7 +65,7 @@ class AllThePosts extends Component {
                     </div>
 
                     <ul className="list-group list-group-flush">
-                        {this.state.posts}
+                        {this.parsePosts(this.props.post.posts)}
                     </ul>
                     <div className="card-body">
                         <div className="container">
@@ -97,13 +79,14 @@ class AllThePosts extends Component {
     }
 }
 
-function mapStateToProps({post,comment}){
-    console.log(post);
-    return{}
+function mapStateToProps({ post, comment }) {    
+    return { post, comment }
 }
 
-function mapDispatchToProps(){
-    return{}
+function mapDispatchToProps(dispatch) {
+    return {
+        setPosts: (data) => dispatch(getPosts(data))
+    }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AllThePosts);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AllThePosts));

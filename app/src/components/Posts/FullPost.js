@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import * as utils from '../../utils/helpers';
+import * as api from '../../utils/api';
 
-export default class FullPost extends Component {
+class FullPost extends Component {
+
     render() {
+       // console.log('props',this.props.post);
         return (
             <div className="row">
 
@@ -11,7 +16,7 @@ export default class FullPost extends Component {
                         <div className="card-header">
                             <div className="row">
                                 <div className="col-10">
-                                    <h1>{this.props.title || 'Title'}</h1>
+                                    <h1>{this.props.post.title || 'Title'}</h1>
                                 </div>
                                 <div className="col ">
                                     <div className="container">
@@ -24,7 +29,7 @@ export default class FullPost extends Component {
                         </div>
 
                         <div className="card-body">
-                            <p>{this.props.body ||'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque cursus dolor fermentum, placeratsapien hendrerit.'}</p>
+                            <p>{this.props.post.body || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque cursus dolor fermentum, placeratsapien hendrerit.'}</p>
 
                         </div>
                         <div className="card-footer">
@@ -39,11 +44,11 @@ export default class FullPost extends Component {
                                     </div>
                                     <div className="col-4">
 
-                                        <span className="badge badge-primary">{this.props.category ||'Category'}</span>
+                                        <span className="badge badge-primary">{this.props.post.category || 'Category'}</span>
                                         &nbsp;
-                                        <span className="badge badge-info">{this.props.category ||'n'} Votes</span>
+                                        <span className="badge badge-info">{this.props.post.voteScore || 'n'} Votes</span>
                                         &nbsp;
-                                        <span className="badge badge-light">{this.props.date || '17:14 01/10/17'}</span>
+                                        <span className="badge badge-light">{utils.toDate(this.props.post.timestamp) || '17:14 01/10/17'}</span>
 
                                     </div>
                                 </div>
@@ -56,3 +61,17 @@ export default class FullPost extends Component {
         )
     }
 }
+
+function mapStateToProps({ post, comment }) {
+    return { post, comment }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        // setPosts: (data) => dispatch(getPosts(data))
+    }
+}
+
+export default FullPost;
+
+//export default withRouter(connect(mapStateToProps)(FullPost));
