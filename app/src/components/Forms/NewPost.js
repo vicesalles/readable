@@ -1,6 +1,29 @@
 import React, { Component } from 'react';
+import * as api from '../../utils/api';
+import * as hlp from '../../utils/helpers';
 
 export default class NewPost extends Component {
+    state = {};
+    submitForm = (e) => {
+
+        e.preventDefault();
+
+        const ref = this.refs;
+
+        let post = {};
+
+        //let myData = new FormData();
+
+        post.id = hlp.guid();
+        post.timestamp = Date.now();
+        post.category = ref.category.value;
+        post.title = ref.title.value;
+        post.body = ref.body.value;
+        ref.owner.value === "" ? post.owner = "Anonymous" : post.owner = ref.owner.value;
+
+        api.postPost(post);
+
+    }
     render() {
         return (
 
@@ -23,24 +46,26 @@ export default class NewPost extends Component {
                             <div className="container">
                                 <form>
                                     <div className="form-group">
-                                        <label for="exampleInputEmail1">Post Title</label>
-                                        <input type="text" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter title" />
+                                        <label>Post Title</label>
+                                        <input type="text" className="form-control" ref="title" required placeholder="Enter title" />
                                     </div>
                                     <div className="form-group">
-                                        <label for="exampleSelect1">Category</label>
-                                        <select className="form-control" id="exampleSelect1">
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5</option>
+                                        <label>Category</label>
+                                        <select className="form-control" ref="category">
+                                            <option value="react">React</option>
+                                            <option value="redux">Redux</option>
+                                            <option value="udacity">Udacity</option>
                                         </select>
                                     </div>
                                     <div className="form-group">
                                         <label>Post</label>
-                                        <textarea className="form-control" rows="8" placeholder="Your message here..."></textarea>
+                                        <textarea ref="body" className="form-control" rows="8" required placeholder="Your message here..."></textarea>
                                     </div>
-                                    <button type="submit" className="btn btn-primary">Submit</button>
+                                    <div className="form-group">
+                                        <label>Author</label>
+                                        <input type="text" className="form-control" ref="owner" placeholder="Enter your name" />
+                                    </div>
+                                    <button onClick={this.submitForm} className="btn btn-primary clicable">Submit</button>
                                 </form>
                             </div>
                         </div>
