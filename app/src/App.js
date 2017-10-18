@@ -18,11 +18,13 @@ class App extends Component {
           <Route component={Broken} />
         </Switch>
         <div className="container">
-            <div className="cont">&nbsp;</div>
+          <div className="cont">&nbsp;</div>
         </div>
       </div>
     );
   }
 }
 
-export default App;
+
+
+export default withRouter(App);

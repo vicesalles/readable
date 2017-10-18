@@ -26,15 +26,10 @@ class AllThePosts extends Component {
     }
 
 
-    getPosts = (q = "") => {
-        api.getPosts(q).then((res) => { return res.json() }).then((posts) => {           
-            const category = this.props.match.params.id;                  
-            this.props.setPosts({ category, posts });
-        });
-    }
-
     componentDidMount() {
-        this.getPosts(this.props.match.params.id || "");       
+        this.props.setPosts(this.props.match.params.id || "");
+        console.log('component props', this.props);
+        console.log(this.props.post.posts);
     }
 
     render() {
@@ -79,7 +74,7 @@ class AllThePosts extends Component {
     }
 }
 
-function mapStateToProps({ post, comment }) {    
+function mapStateToProps({ post, comment }) {
     return { post, comment }
 }
 

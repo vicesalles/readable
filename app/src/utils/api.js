@@ -19,18 +19,26 @@ export function getPosts(cat = '') {
 
     } else {
 
-        console.log(cat);
-
         return fetch(`http://localhost:3001/${cat}/posts`, {
             method: 'GET',
             headers: {
                 'Authorization': 'w-want'
             }
         }).then((r) => r)
-
     }
 
-
+}
+/**
+ * Get a Single Post
+ * @param String id 
+ */
+export function getPost(id){
+    return fetch(`http://localhost:3001/posts/${id}`, {
+        method: 'GET',
+        headers: {
+            'Authorization': 'w-want'
+        }
+    }).then((r) => r)
 }
 
 /**
@@ -49,6 +57,17 @@ export function postPost(post) {
 
     });
 
+}
+
+export function voteApost(vote,id){
+    return fetch(`http://localhost:3001/posts/${id}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'w-want'
+        },
+        body: vote
+    }).then((r) => console.log(r))
 }
 
 
@@ -76,6 +95,7 @@ export function postComment(comment, parent) {
     return fetch(`http://localhost:3001/comments`, {
         method: 'POST',
         headers: {
+            'Content-Type': 'application/json',
             'Authorization': 'w-want'
         },
         body: comment
@@ -83,5 +103,13 @@ export function postComment(comment, parent) {
 
 }
 
-
-//export function get
+export function voteAcomment(vote,id){
+    return fetch(`http://localhost:3001/comments/${id}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'w-want'
+        },
+        body: vote
+    }).then((r) => console.log(r))
+}
