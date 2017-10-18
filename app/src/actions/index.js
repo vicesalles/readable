@@ -1,5 +1,6 @@
 import * as api from '../utils/api';
 
+export const GET_CURRENT_POST = "GET_CURRENT_POST";
 export const SET_CURRENT_POST = "SET_CURRENT_POST";
 export const GET_POSTS = "GET_POSTS";
 export const SET_POSTS = "SET_POSTS";
@@ -8,6 +9,7 @@ export const ADD_POST = 'ADD_POST';
 export const DELETE_POST = 'DELETE_POST';
 export const EDIT_POST = 'EDIT_POST';
 export const VOTE_POST = 'VOTE_POST';
+export const POST_VOTED = 'POST_VOTED';
 
 export const GET_COMMENTS = 'GET_COMMENTS';
 export const ADD_COMMENT = 'ADD_COMMENT';
@@ -31,20 +33,19 @@ export function getPosts(category) {
 
         api.getPosts(cat).then((res) => res.json()).then((posts) => {
             console.log('action:', posts);
-            const res = {posts,category};
-            dispatch(setPosts(res));   
+            const res = { posts, category };
+            dispatch(setPosts(res));
         })
 
     }
 
 }
 
-
- /**
-  * Passes the getPosts results to the Store
-  * @param Object action
-  */
-  export function setPosts(action) {
+/**
+ * Passes the getPosts results to the Store
+ * @param Object action
+ */
+export function setPosts(action) {
     return {
         type: SET_POSTS,
         category: action.category,
@@ -52,16 +53,23 @@ export function getPosts(category) {
     }
 };
 
-export function setCurrentPost(id) {
+export function getCurrentPost(id) {
 
-    return (dispatch, id) => {
-        api.getPost(id).then((post) => {
-            return {
-                type: SET_CURRENT_POST,
-                post
-            }
+    return (dispatch) => {
+        api.getPost(id).then((res) => res.json()).then((post) => {
+            dispatch(setCurrentPost(post))
         })
     }
+
+}
+
+export function setCurrentPost(post) {
+   // console.log('action', post);
+    return {
+        type: SET_CURRENT_POST,
+        post
+    }
+
 
 }
 
@@ -97,10 +105,18 @@ export function editPost({ id, title, body }) {
 }
 
 export function votePost(id, vote) {
+    console.log('api:',vote);
+    return (dispatch) => {
+        api.voteApost(id, vote).then((r)=>
+            dispatch(postVoted(r))
+        )
+    }
+}
+
+export function postVoted(voteScore) {
     return {
-        type: VOTE_POST,
-        id,
-        vote
+        type: POST_VOTED,
+        voteScore
     }
 }
 

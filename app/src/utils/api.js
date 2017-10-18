@@ -32,7 +32,7 @@ export function getPosts(cat = '') {
  * Get a Single Post
  * @param String id 
  */
-export function getPost(id){
+export function getPost(id) {
     return fetch(`http://localhost:3001/posts/${id}`, {
         method: 'GET',
         headers: {
@@ -59,15 +59,24 @@ export function postPost(post) {
 
 }
 
-export function voteApost(vote,id){
+/**
+ * Gives a vote to a post
+ * @param String id 
+ * @param String vote upVote || DownVote 
+ */
+export function voteApost(id, vote) {
+    
+    //The object that's need to be passed
+    const q = {"option":vote};
+    
     return fetch(`http://localhost:3001/posts/${id}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': 'w-want'
         },
-        body: vote
-    }).then((r) => console.log(r))
+        body: JSON.stringify(q)
+    }).then((r) => r.json()).then((r)=>console.log(r.voteScore))
 }
 
 
@@ -103,7 +112,7 @@ export function postComment(comment, parent) {
 
 }
 
-export function voteAcomment(vote,id){
+export function voteAcomment(vote, id) {
     return fetch(`http://localhost:3001/comments/${id}`, {
         method: 'POST',
         headers: {

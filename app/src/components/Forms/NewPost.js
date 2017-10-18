@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import * as api from '../../utils/api';
 import * as hlp from '../../utils/helpers';
 
@@ -10,10 +11,7 @@ export default class NewPost extends Component {
 
         const ref = this.refs;
 
-        let post = {};
-
-        //let myData = new FormData();
-
+        let post = {};      
         post.id = hlp.guid();
         post.timestamp = Date.now();
         post.category = ref.category.value;

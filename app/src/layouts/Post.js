@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
+import * as actions from '../actions';
 import * as utils from '../utils/helpers';
 import * as api from '../utils/api';
 
@@ -13,11 +14,12 @@ import Comments from '../components/Comments/Comments';
 
 class Post extends Component {
 
-    componentDidMount(){
+    componentDidMount() {
         const postId = this.props.match.params.id;
-        this.props.setCurrentPost(postId);
+        this.props.getCurrentPost(postId);
+        
     }
-    
+
     render() {
         return (<div className="container-fluid">
             <Header />
@@ -39,7 +41,7 @@ function mapStateToProps({ post, comment }) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        setCurrentPost : (data) => dispatch(this.props.setCurrentPost(data))    
+        getCurrentPost: (data) => dispatch(actions.getCurrentPost(data))
     }
 }
 
