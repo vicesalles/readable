@@ -11,8 +11,8 @@ class FullPost extends Component {
         commenting: false
     }
 
-    vote = (e, v) => {
-        e.preventDefault();
+    vote = (v) => {
+      //  e.preventDefault();
         console.log('component', v);
         const id = this.props.match.params.id;
         this.props.submitVote(id, v);
@@ -58,9 +58,9 @@ class FullPost extends Component {
                                     <div className="col-8">
                                         <a className="btn btn-success clicable">Comment</a>
                                         &nbsp;
-                                        <a onClick={(e) => this.vote(e, 'upVote')} className="btn btn-success clicable">UpVote</a>
+                                        <a onClick={() => this.vote('upVote')} className="btn btn-success clicable">UpVote</a>
                                         &nbsp;
-                                        <a onClick={(e) => this.vote(e, 'downVote')} className="btn btn-success clicable">DownVote</a>
+                                        <a onClick={() => this.vote('downVote')} className="btn btn-success clicable">DownVote</a>
                                     </div>
                                     <div className="col-4">
 
