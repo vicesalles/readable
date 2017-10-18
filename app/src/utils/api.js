@@ -76,7 +76,7 @@ export function voteApost(id, vote) {
             'Authorization': 'w-want'
         },
         body: JSON.stringify(q)
-    }).then((r) => r.json()).then((r)=>console.log(r.voteScore))
+    }).then((r) => r.json()).then((r)=>r.voteScore)
 }
 
 

@@ -25,11 +25,8 @@ class AllThePosts extends Component {
 
     }
 
-
     componentDidMount() {
-        this.props.setPosts(this.props.match.params.id || "");
-        console.log('component props', this.props);
-        console.log(this.props.post.posts);
+        this.props.setPosts(this.props.match.params.id || "");       
     }
 
     render() {
@@ -74,8 +71,8 @@ class AllThePosts extends Component {
     }
 }
 
-function mapStateToProps({ post, comment }) {
-    return { post, comment }
+function mapStateToProps({ post }) {
+    return { post }
 }
 
 function mapDispatchToProps(dispatch) {

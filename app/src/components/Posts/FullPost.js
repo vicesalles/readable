@@ -12,16 +12,8 @@ class FullPost extends Component {
     }
 
     vote = (v) => {
-      //  e.preventDefault();
-        console.log('component', v);
         const id = this.props.match.params.id;
         this.props.submitVote(id, v);
-    }
-
-
-
-    componentDidMount() {
-        //  console.log(this.props.post.currentPost);
     }
 
     render() {
@@ -66,7 +58,7 @@ class FullPost extends Component {
 
                                         <span className="badge badge-primary">{this.props.post.category || 'Category'}</span>
                                         &nbsp;
-                                        <span className="badge badge-info">{this.props.post.voteScore || 'n'} Votes</span>
+                                        <span className="badge badge-info">{this.props.post.voteScore || '0'} Votes</span>
                                         &nbsp;
                                         <span className="badge badge-light">{utils.toDate(this.props.post.timestamp) || '17:14 01/10/17'}</span>
 

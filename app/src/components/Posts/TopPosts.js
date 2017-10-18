@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Post from './Post';
 import { connect } from 'react-redux';
 
-export default class TopPosts extends Component {
+class TopPosts extends Component {
     
     example = {
         title:"Is Bruno legit?",
@@ -28,3 +28,6 @@ export default class TopPosts extends Component {
         )
     }
 }
+
+
+export default connect()(TopPosts);

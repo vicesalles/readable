@@ -56,7 +56,7 @@ function post(state = initialPostState, action) {
         case DELETE_POST:
             console.log('post deleted');
         case POST_VOTED:
-            return state;
+
             return{
                    ...state,
                    ['currentPost']:{
@@ -65,7 +65,7 @@ function post(state = initialPostState, action) {
                    }
                    
                }
-            console.log('post voted');
+            
         case SET_CURRENT_POST:
             console.log('setting current post');
             return { ...state,

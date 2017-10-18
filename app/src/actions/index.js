@@ -105,7 +105,7 @@ export function editPost({ id, title, body }) {
 }
 
 export function votePost(id, vote) {
-    console.log('api:',vote);
+    
     return (dispatch) => {
         api.voteApost(id, vote).then((r)=>
             dispatch(postVoted(r))
@@ -114,6 +114,7 @@ export function votePost(id, vote) {
 }
 
 export function postVoted(voteScore) {
+    
     return {
         type: POST_VOTED,
         voteScore
