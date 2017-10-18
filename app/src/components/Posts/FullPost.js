@@ -11,17 +11,17 @@ class FullPost extends Component {
         commenting: false
     }
 
-    vote = (e,v) => {
+    vote = (e, v) => {
         e.preventDefault();
-        console.log('component',v);
+        console.log('component', v);
         const id = this.props.match.params.id;
-        this.props.submitVote(id,v);
+        this.props.submitVote(id, v);
     }
 
-    
 
-    componentDidMount(){
-      //  console.log(this.props.post.currentPost);
+
+    componentDidMount() {
+        //  console.log(this.props.post.currentPost);
     }
 
     render() {
@@ -34,7 +34,7 @@ class FullPost extends Component {
                         <div className="card-header">
                             <div className="row">
                                 <div className="col-10">
-                                    <h1>{this.props.post.currentPost.title || 'Title'}</h1>
+                                    <h1>{this.props.post.title || 'Title'}</h1>
                                 </div>
                                 <div className="col ">
                                     <div className="container">
@@ -49,7 +49,7 @@ class FullPost extends Component {
                         </div>
 
                         <div className="card-body">
-                            <p>{this.props.post.currentPost.body || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque cursus dolor fermentum, placeratsapien hendrerit.'}</p>
+                            <p>{this.props.post.body || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque cursus dolor fermentum, placeratsapien hendrerit.'}</p>
 
                         </div>
                         <div className="card-footer">
@@ -58,17 +58,17 @@ class FullPost extends Component {
                                     <div className="col-8">
                                         <a className="btn btn-success clicable">Comment</a>
                                         &nbsp;
-                                        <a onClick={(e)=>this.vote(e,'upVote')} className="btn btn-success clicable">UpVote</a>
+                                        <a onClick={(e) => this.vote(e, 'upVote')} className="btn btn-success clicable">UpVote</a>
                                         &nbsp;
-                                        <a onClick={(e)=>this.vote(e,'downVote')} className="btn btn-success clicable">DownVote</a>
+                                        <a onClick={(e) => this.vote(e, 'downVote')} className="btn btn-success clicable">DownVote</a>
                                     </div>
                                     <div className="col-4">
 
-                                        <span className="badge badge-primary">{this.props.post.currentPost.category || 'Category'}</span>
+                                        <span className="badge badge-primary">{this.props.post.category || 'Category'}</span>
                                         &nbsp;
-                                        <span className="badge badge-info">{this.props.post.currentPost.voteScore || 'n'} Votes</span>
+                                        <span className="badge badge-info">{this.props.post.voteScore || 'n'} Votes</span>
                                         &nbsp;
-                                        <span className="badge badge-light">{utils.toDate(this.props.post.currentPost.timestamp) || '17:14 01/10/17'}</span>
+                                        <span className="badge badge-light">{utils.toDate(this.props.post.timestamp) || '17:14 01/10/17'}</span>
 
                                     </div>
                                 </div>
@@ -82,8 +82,8 @@ class FullPost extends Component {
     }
 }
 
-function mapStateToProps({ post, comment }) {
-    return { post, comment }
+function mapStateToProps({ post }) {
+    return { post: post.currentPost }
 }
 
 function mapDispatchToProps(dispatch) {
