@@ -4,6 +4,7 @@
  * It returns all the posts or only the posts for a given category if passed
  * @param String cat Category name 
  */
+
 export function getPosts(cat = '') {
 
     //If no category specified get all the posts
@@ -16,7 +17,6 @@ export function getPosts(cat = '') {
             }
         }).then((r) => r)
 
-
     } else {
 
         return fetch(`http://localhost:3001/${cat}/posts`, {
@@ -28,6 +28,7 @@ export function getPosts(cat = '') {
     }
 
 }
+
 /**
  * Get a Single Post
  * @param String id 
@@ -45,7 +46,7 @@ export function getPost(id) {
  * Posts a post
  * @param Object post - Post 
  */
-export function postPost(post) {
+export function addPost(post) {
 
     return fetch('http://localhost:3001/posts', {
         method: 'POST',

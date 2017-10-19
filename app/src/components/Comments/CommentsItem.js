@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import {withRouter} from 'react-router-dom';
+import { connect } from 'react-redux';
 import * as utils from '../../utils/helpers';
 
-export default class CommentsItem extends Component {
+class CommentsItem extends Component {
     render() {
-        
+
         return (
             <li className="list-group-item">
                 <div className="row">
@@ -12,9 +14,13 @@ export default class CommentsItem extends Component {
                 <div className="row">
                     <div className="container">
                         <span>
-                            <span className="badge badge-success"><a className="pillbutton">UpVote</a></span>
+                            <span className="badge badge-success">
+                                <a onClick={()=>this.props.submitVote(this.props.comment.id,'upVote')} className="pillbutton clicable">UpVote</a>
+                            </span>
                             &nbsp;
-                            <span className="badge badge-danger"> <a className="pillbutton">downVote</a></span>
+                            <span className="badge badge-danger">
+                                <a onClick={()=>this.props.submitVote(this.props.comment.id,'downVote')} className="pillbutton clicable">downVote</a>
+                            </span>
                             &nbsp;
                             <span className="badge badge-info">{this.props.comment.voteScore || 'n'} Votes</span>
                             &nbsp;
@@ -22,9 +28,13 @@ export default class CommentsItem extends Component {
                         </span>
                         |
                     <span>
-                            <span className="badge badge-success"><a className="pillbutton">Edit</a></span>
+                            <span className="badge badge-success">
+                                <a className="pillbutton">Edit</a>
+                            </span>
                             &nbsp;
-                            <span className="badge badge-danger"> <a className="pillbutton">delete</a></span>
+                            <span className="badge badge-danger">
+                                <a className="pillbutton">delete</a>
+                            </span>
 
                         </span>
 
@@ -34,3 +44,13 @@ export default class CommentsItem extends Component {
         )
     }
 }
+
+function mapStateToProps({ comment }) {
+
+}
+
+function mapDispatchToProps(dispatch) {
+    submitVote: (id,vote) => dispatch(this.props.voteComment(id,vote))
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CommentsItem));

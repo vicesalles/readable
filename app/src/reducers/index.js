@@ -5,7 +5,7 @@ import {
     VOTE_ITEM,
     SET_POSTS,
     SORT_POSTS,
-    ADD_POST,
+    POST_POSTED,
     SET_CURRENT_POST,
     POST_VOTED,
     DELETE_POST,
@@ -22,7 +22,8 @@ const initialPostState = {
     category: '',
     filter: '',
     posts: [],
-    currentPost: ''
+    currentPost: '',
+    gotPosted: false
 }
 
 function post(state = initialPostState, action) {
@@ -42,7 +43,8 @@ function post(state = initialPostState, action) {
             return {
                 ...state,
                 ['posts']: posts,
-                ['category']: category
+                ['category']: category,
+                ['gotPosted']: false
             }
 
         case SORT_POSTS:
@@ -51,8 +53,11 @@ function post(state = initialPostState, action) {
                 ['filter']: filter
             }
             console.log('sort posts');
-        case ADD_POST:
-            console.log('post added');
+        case POST_POSTED:
+            return{
+                ...state,
+                ['gotPosted']:true
+            }
         case DELETE_POST:
             console.log('post deleted');
         case POST_VOTED:

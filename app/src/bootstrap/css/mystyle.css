@@ -15,3 +15,7 @@
 .capital{
     text-transform: capitalize;
 }
+
+.clicable{
+    cursor: pointer;
+}
