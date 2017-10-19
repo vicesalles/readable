@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Route, Switch, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { BrowserRouter, Route, Switch, withRouter } from 'react-router-dom';
 import Default from './layouts/Default';
 import Category from './layouts/Category';
 import Post from './layouts/Post';
@@ -10,6 +11,7 @@ class App extends Component {
   render() {
     return (
       <div className="container-fluid">
+       
         <Switch>
           <Route path="/" exact component={Default} />
           <Route path="/category/:id" component={Category} />
@@ -17,6 +19,7 @@ class App extends Component {
           <Route path="/edit/:id" component={Edit} />
           <Route component={Broken} />
         </Switch>
+       
         <div className="container">
           <div className="cont">&nbsp;</div>
         </div>
@@ -27,4 +30,4 @@ class App extends Component {
 
 
 
-export default withRouter(App);
+export default withRouter(connect()(App));

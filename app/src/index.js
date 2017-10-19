@@ -11,10 +11,12 @@ import thunk from 'redux-thunk';
 import './bootstrap/css/bootstrap.min.css';
 import './bootstrap/css/mystyle.css';
 
-const composeEnhacers = window.__REDUX_DEVTOOLS_EXTENSION__COMPOSE_ || compose;
+const composeEnhacers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
+
+const state = {}
 const store = createStore(
-    reducer,
+    reducer,   
     composeEnhacers(
         applyMiddleware(thunk)
     )
@@ -23,4 +25,4 @@ const store = createStore(
 ReactDOM.render(
     <Provider store={store} ><BrowserRouter><App /></BrowserRouter></Provider>
     , document.getElementById('root'));
-registerServiceWorker();
+
