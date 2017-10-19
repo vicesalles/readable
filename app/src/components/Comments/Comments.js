@@ -5,11 +5,11 @@ import { connect } from 'react-redux';
 export default class Comments extends Component {
     parseComments = (array) =>{
 
-        const res = array.map((c)=>{
+     /*   const res = array.map((c)=>{
             return <CommentsItem key={c.id} comment={c} />
         })
 
-        return res;
+        return res;*/
     }
     render() {
         return (
@@ -17,11 +17,11 @@ export default class Comments extends Component {
                 <div className="card">
                     <div className="card-header">Comments</div>
                     <ul className="list-group list-group-flush">
-                        {this.parseComments(this.props.comments)}
+                        {this.parseComments()}
                     </ul>
                     <div className="card-body">
                         <div className="row">
-                            <a className="btn btn-success btn-lg" role="button">Comment</a>
+                            <a className="btn btn-success btn-lg clicable" role="button">Comment</a>
                         </div>
                     </div>
 

@@ -13,11 +13,16 @@ class NewPost extends Component {
         owner: '',
         category: "react"
     };
+
+    /**
+     * Submiting form method
+     * @param Event e
+     */
     submitForm = (e) => {
 
         e.preventDefault();
 
-        //Create the Post object
+        //Creating the Post object
         let post = {};
         post.id = hlp.guid();
         post.timestamp = Date.now();
@@ -31,6 +36,12 @@ class NewPost extends Component {
 
     }
 
+    /**
+     * Method for managing form/state relation
+     * @param Event e
+     * @param String field: Describes the updated fiel
+     */
+
     valueChanged = (e, field) => {
 
         const value = e.target.value;
@@ -39,7 +50,7 @@ class NewPost extends Component {
     }
 
     render() {
-
+        //Checking if post has been posted
         if (this.props.post.gotPosted) {
 
             return (
@@ -61,7 +72,7 @@ class NewPost extends Component {
                 </div>)
 
         } else {
-
+            //Showing Posting Form
             return (
 
                 <div className="col">
@@ -129,9 +140,7 @@ class NewPost extends Component {
 
             );
 
-
         }
-
 
     }
 }
