@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import {withRouter} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as utils from '../../utils/helpers';
+import { voteComment } from '../../actions';
 
 class CommentsItem extends Component {
     render() {
@@ -15,11 +16,11 @@ class CommentsItem extends Component {
                     <div className="container">
                         <span>
                             <span className="badge badge-success">
-                                <a onClick={()=>this.props.submitVote(this.props.comment.id,'upVote')} className="pillbutton clicable">UpVote</a>
+                                <a onClick={() => this.props.submitVote(this.props.comment.id, 'upVote')} className="pillbutton clicable">UpVote</a>
                             </span>
                             &nbsp;
                             <span className="badge badge-danger">
-                                <a onClick={()=>this.props.submitVote(this.props.comment.id,'downVote')} className="pillbutton clicable">downVote</a>
+                                <a onClick={() => this.props.submitVote(this.props.comment.id, 'downVote')} className="pillbutton clicable">downVote</a>
                             </span>
                             &nbsp;
                             <span className="badge badge-info">{this.props.comment.voteScore || 'n'} Votes</span>
@@ -29,11 +30,11 @@ class CommentsItem extends Component {
                         |
                     <span>
                             <span className="badge badge-success">
-                                <a className="pillbutton">Edit</a>
+                                <a className="pillbutton clicable">Edit</a>
                             </span>
                             &nbsp;
                             <span className="badge badge-danger">
-                                <a className="pillbutton">delete</a>
+                                <a className="pillbutton clicable">delete</a>
                             </span>
 
                         </span>
@@ -45,12 +46,16 @@ class CommentsItem extends Component {
     }
 }
 
-function mapStateToProps({ comment }) {
-
+function mapStateToProps({ comment }, ownProps) {
+    return {
+        ownProps
+    }
 }
 
 function mapDispatchToProps(dispatch) {
-    submitVote: (id,vote) => dispatch(this.props.voteComment(id,vote))
+    return {
+        submitVote: (id, vote) => dispatch(voteComment(id, vote))
+    }
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CommentsItem));

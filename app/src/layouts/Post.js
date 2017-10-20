@@ -14,10 +14,12 @@ import Comments from '../components/Comments/Comments';
 
 class Post extends Component {
 
+  
     componentDidMount() {
+
         const postId = this.props.match.params.id;
         this.props.getCurrentPost(postId);
-        
+                
     }
 
     render() {

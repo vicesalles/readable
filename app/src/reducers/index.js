@@ -10,7 +10,7 @@ import {
     POST_VOTED,
     DELETE_POST,
     EDIT_POST,
-    GET_COMMENTS,
+    GOT_COMMENTS,
     ADD_COMMENT,
     DELETE_COMMENT,
     EDIT_COMMENT,
@@ -54,23 +54,23 @@ function post(state = initialPostState, action) {
             }
             console.log('sort posts');
         case POST_POSTED:
-            return{
+            return {
                 ...state,
-                ['gotPosted']:true
+                ['gotPosted']: true
             }
         case DELETE_POST:
             console.log('post deleted');
         case POST_VOTED:
 
-            return{
-                   ...state,
-                   ['currentPost']:{
+            return {
+                ...state,
+                ['currentPost']: {
                     ...state['currentPost'],
                     ['voteScore']: action.voteScore
-                   }
-                   
-               }
-            
+                }
+
+            }
+
         case SET_CURRENT_POST:
             console.log('setting current post');
             return { ...state,
@@ -91,8 +91,11 @@ function comment(state = initialCommentState, action) {
     switch (action.type) {
         case ADD_COMMENT:
             console.log('added comment');
-        case GET_COMMENTS:
-            console.log('omments voted');
+        case GOT_COMMENTS:
+            return {
+                ...state,
+                ['comments']: action.comments
+            }
         case VOTE_COMMENT:
             console.log('comment voted');
         default:

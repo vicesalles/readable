@@ -15,6 +15,7 @@ export const POST_VOTED = "POST_VOTED";
 
 //ACTIONS FOR COMMENTS
 export const GET_COMMENTS = 'GET_COMMENTS';
+export const GOT_COMMENTS = 'GOT_COMMENTS';
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const DELETE_COMMENT = "DELETE_COMMENT";
 export const EDIT_COMMENT = "EDIT_COMMENT";
@@ -66,7 +67,7 @@ export function getCurrentPost(id) {
 }
 
 export function setCurrentPost(post) {
-    // console.log('action', post);
+  
     return {
         type: SET_CURRENT_POST,
         post
@@ -142,16 +143,28 @@ export function postVoted(voteScore) {
     }
 }
 
+
+
 /**
  * COMMENTS
  */
 
-export function getComments({
-    parentId
-}) {
+export function getComments(parentId) {
+    
+    return (dispatch) => {
+        api.getComments(parentId).then((comments) => {
+            dispatch(gotComments(comments));
+        })
+
+    }
+
+
+}
+
+export function gotComments(comments){
     return {
-        type: GET_COMMENTS,
-        parentId
+        type: GOT_COMMENTS,
+        comments
     }
 }
 

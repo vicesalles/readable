@@ -1,15 +1,23 @@
 import React, { Component } from 'react';
-import CommentsItem from './CommentsItem';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { getComments } from '../../actions';
+import CommentsItem from './CommentsItem';
 
-export default class Comments extends Component {
-    parseComments = (array) =>{
+class Comments extends Component {
+    parseComments = (array) => {
+     
+           const res = array.map((c)=>{
+               return <CommentsItem key={c.id} comment={c} />
+           })
+   
+           return res;
+    }
+    componentDidMount() {
 
-     /*   const res = array.map((c)=>{
-            return <CommentsItem key={c.id} comment={c} />
-        })
+        const postId = this.props.match.params.id;
+        this.props.getComments(postId);
 
-        return res;*/
     }
     render() {
         return (
@@ -17,7 +25,7 @@ export default class Comments extends Component {
                 <div className="card">
                     <div className="card-header">Comments</div>
                     <ul className="list-group list-group-flush">
-                        {this.parseComments()}
+                        {this.parseComments(this.props.comments)}
                     </ul>
                     <div className="card-body">
                         <div className="row">
@@ -32,3 +40,20 @@ export default class Comments extends Component {
         )
     }
 }
+
+function mapStateToProps({ comment }, ownProps) {
+    
+    const comments = comment.comments;
+    return {
+        comments,
+        ownProps
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        getComments: (id) => dispatch(getComments(id))
+    }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Comments));
