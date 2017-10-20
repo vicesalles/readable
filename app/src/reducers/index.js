@@ -13,8 +13,7 @@ import {
     GOT_COMMENTS,
     ADD_COMMENT,
     DELETE_COMMENT,
-    EDIT_COMMENT,
-    VOTE_COMMENT
+    EDIT_COMMENT
 } from '../actions';
 
 
@@ -95,9 +94,7 @@ function comment(state = initialCommentState, action) {
             return {
                 ...state,
                 ['comments']: action.comments
-            }
-        case VOTE_COMMENT:
-            console.log('comment voted');
+            }        
         default:
             return state;
     }

@@ -21,6 +21,8 @@ export const DELETE_COMMENT = "DELETE_COMMENT";
 export const EDIT_COMMENT = "EDIT_COMMENT";
 export const VOTE_COMMENT = "VOTE_COMMENT";
 
+
+
 /**
  * POSTS
  */
@@ -67,7 +69,7 @@ export function getCurrentPost(id) {
 }
 
 export function setCurrentPost(post) {
-  
+
     return {
         type: SET_CURRENT_POST,
         post
@@ -150,7 +152,7 @@ export function postVoted(voteScore) {
  */
 
 export function getComments(parentId) {
-    
+
     return (dispatch) => {
         api.getComments(parentId).then((comments) => {
             dispatch(gotComments(comments));
@@ -161,7 +163,7 @@ export function getComments(parentId) {
 
 }
 
-export function gotComments(comments){
+export function gotComments(comments) {
     return {
         type: GOT_COMMENTS,
         comments
@@ -200,9 +202,10 @@ export function editComment({
 }
 
 export function voteComment(id, vote) {
-    return {
-        type: VOTE_COMMENT,
-        id,
-        vote
+    return (dispatch) => {
+        api.voteAcomment(vote, id).then((r) => {
+            dispatch(getComments(r.parentId));
+        })
     }
 }
+

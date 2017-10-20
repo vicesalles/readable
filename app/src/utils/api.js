@@ -66,10 +66,12 @@ export function addPost(post) {
  * @param String vote upVote || DownVote 
  */
 export function voteApost(id, vote) {
-    
+
     //The object that's need to be passed
-    const q = {"option":vote};
-    
+    const q = {
+        "option": vote
+    };
+
     return fetch(`http://localhost:3001/posts/${id}`, {
         method: 'POST',
         headers: {
@@ -77,7 +79,7 @@ export function voteApost(id, vote) {
             'Authorization': 'w-want'
         },
         body: JSON.stringify(q)
-    }).then((r) => r.json()).then((r)=>r.voteScore)
+    }).then((r) => r.json()).then((r) => r.voteScore)
 }
 
 
@@ -114,12 +116,16 @@ export function postComment(comment, parent) {
 }
 
 export function voteAcomment(vote, id) {
+    //The object that's need to be passed
+    const q = {
+        "option": vote
+    };
     return fetch(`http://localhost:3001/comments/${id}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': 'w-want'
         },
-        body: vote
-    }).then((r) => console.log(r))
+        body: JSON.stringify(q)
+    }).then((r) => r.json()).then((r) => {return {'parentId':r.parentId,'voteScore':r.voteScore}})
 }
