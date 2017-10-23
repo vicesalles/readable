@@ -11,6 +11,7 @@ import {
     DELETE_POST,
     EDIT_POST,
     GOT_COMMENTS,
+    WANNA_COMMENT,
     ADD_COMMENT,
     DELETE_COMMENT,
     EDIT_COMMENT
@@ -93,8 +94,15 @@ function comment(state = initialCommentState, action) {
         case GOT_COMMENTS:
             return {
                 ...state,
-                ['comments']: action.comments
-            }        
+                ['comments']: action.comments,
+                commenting: false
+            }
+        case WANNA_COMMENT:
+            console.log('wanna comment');
+            return {
+                ...state,
+                commenting: true
+            }
         default:
             return state;
     }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import * as actions from '../../actions';
+import { votePost, wannaComment } from '../../actions';
 import * as utils from '../../utils/helpers';
 import * as api from '../../utils/api';
 
@@ -48,7 +48,7 @@ class FullPost extends Component {
                             <div className="container">
                                 <div className="row">
                                     <div className="col-8">
-                                        <a className="btn btn-success clicable">Comment</a>
+                                        <a onClick={() => this.props.wannaComment()} className="btn btn-success clicable">Comment</a>
                                         &nbsp;
                                         <a onClick={() => this.vote('upVote')} className="btn btn-success clicable">UpVote</a>
                                         &nbsp;
@@ -80,7 +80,8 @@ function mapStateToProps({ post }) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        submitVote: (id, vote) => dispatch(actions.votePost(id, vote))
+        submitVote: (id, vote) => dispatch(votePost(id, vote)),
+        wannaComment: () => dispatch(wannaComment())
     }
 }
 

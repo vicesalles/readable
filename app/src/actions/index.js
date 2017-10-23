@@ -16,7 +16,9 @@ export const POST_VOTED = "POST_VOTED";
 //ACTIONS FOR COMMENTS
 export const GET_COMMENTS = 'GET_COMMENTS';
 export const GOT_COMMENTS = 'GOT_COMMENTS';
+export const WANNA_COMMENT = "WANNA_COMMENT";
 export const ADD_COMMENT = 'ADD_COMMENT';
+export const COMMENT_ADDED = "COMMENT_ADDED";
 export const DELETE_COMMENT = "DELETE_COMMENT";
 export const EDIT_COMMENT = "EDIT_COMMENT";
 export const VOTE_COMMENT = "VOTE_COMMENT";
@@ -170,42 +172,61 @@ export function gotComments(comments) {
     }
 }
 
-export function addComment({
-    parentId,
-    text
-}) {
+export function wannaComment() {
     return {
-        type: ADD_COMMENT,
-        parentId,
-        text
+        type: WANNA_COMMENT
     }
 }
 
-export function deleteComment({
-    id
-}) {
-    return {
-        type: DELETE_COMMENT,
+export function addComment(q) {
+
+    return dispatch => {
+
+
+        api.addComment(q).then((res) => {
+
+                console.log('action', res);
+              
+                   dispatch(getComments(q.parentId));
+                    
+                }
+
+
+            )
+
+
+
+        }
+
+
+    }
+
+
+
+    export function deleteComment({
         id
+    }) {
+        return {
+            type: DELETE_COMMENT,
+            id
+        }
     }
-}
 
-export function editComment({
-    id,
-    text
-}) {
-    return {
-        type: EDIT_COMMENT,
+    export function editComment({
         id,
         text
+    }) {
+        return {
+            type: EDIT_COMMENT,
+            id,
+            text
+        }
     }
-}
 
-export function voteComment(id, vote) {
-    return (dispatch) => {
-        api.voteAcomment(vote, id).then((r) => {
-            dispatch(getComments(r.parentId));
-        })
+    export function voteComment(id, vote) {
+        return (dispatch) => {
+            api.voteAcomment(vote, id).then((r) => {
+                dispatch(getComments(r.parentId));
+            })
+        }
     }
-}
-

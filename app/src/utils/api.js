@@ -127,5 +127,23 @@ export function voteAcomment(vote, id) {
             'Authorization': 'w-want'
         },
         body: JSON.stringify(q)
-    }).then((r) => r.json()).then((r) => {return {'parentId':r.parentId,'voteScore':r.voteScore}})
+    }).then((r) => r.json()).then((r) => {
+        return {
+            'parentId': r.parentId,
+            'voteScore': r.voteScore
+        }
+    })
+}
+
+
+export function addComment(q) {
+        
+    return fetch('http://localhost:3001/comments/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'w-want'
+        },
+        body: JSON.stringify(q)
+    })
 }

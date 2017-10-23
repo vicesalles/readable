@@ -11,6 +11,7 @@ import FullPost from '../components/Posts/FullPost';
 import CategoriesCard from '../components/categories/CategoriesCard';
 import TopPosts from '../components/Posts/TopPosts';
 import Comments from '../components/Comments/Comments';
+import NewComment from '../components/Forms/NewComment'
 
 class Post extends Component {
 
@@ -28,6 +29,7 @@ class Post extends Component {
             <FullPost />
             <div className="row row-space">
                 <Comments />
+                {this.props.comment.commenting===true?<NewComment/>:''}
             </div>
             <div className="row row-space">
                 <CategoriesCard />
