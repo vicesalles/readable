@@ -11,7 +11,7 @@ export default class Header extends Component {
                     <p className="display-4">{this.props.subtitle || ''}</p>
                     <p className="lead">Your comments matter</p>
                     <p className="lead">
-                        <Link to="/"><a className="btn btn-success btn-lg" role="button">Home</a></Link>
+                        <Link className="btn btn-success btn-lg" to="/">Home</Link>
                         &nbsp;
                         <Link className="btn btn-success btn-lg" to="/edit/new">New Post</Link>
                     </p>
