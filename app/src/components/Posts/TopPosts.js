@@ -15,7 +15,7 @@ class TopPosts extends Component {
                     </div>
 
                     <ul className="list-group list-group-flush">
-                        {this.props.posts.map((el) => { return <Post id={el.id} post={el} /> })}
+                        {this.props.posts.map((el) => { return <Post key={el.id} post={el} /> })}
                     </ul>
                 </div>
             </div>
