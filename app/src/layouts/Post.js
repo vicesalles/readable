@@ -28,7 +28,9 @@ class Post extends Component {
             <Header />
             <FullPost />
             <div className="row row-space">
-                <Comments />
+                <Comments />               
+            </div>
+            <div className="row row-space">        
                 {this.props.comment.commenting===true?<NewComment/>:''}
             </div>
             <div className="row row-space">
