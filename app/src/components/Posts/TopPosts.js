@@ -1,17 +1,11 @@
 import React, { Component } from 'react';
 import Post from './Post';
 import { connect } from 'react-redux';
+import { getPosts } from '../../actions'
+import * as helpers from '../../utils/helpers';
 
 class TopPosts extends Component {
-    
-    example = {
-        title:"Is Bruno legit?",
-        id:"44",
-        category:"bob",
-        date:"17:14 1/10/17",
-        votes: "15"
-    }
-
+  
     render() {
         return (
             <div className="col">
@@ -21,7 +15,7 @@ class TopPosts extends Component {
                     </div>
 
                     <ul className="list-group list-group-flush">
-                    <Post post={this.example}/>
+                        {this.props.posts.map((el) => { return <Post id={el.id} post={el} /> })}
                     </ul>
                 </div>
             </div>
@@ -29,5 +23,14 @@ class TopPosts extends Component {
     }
 }
 
+function mapStateToProps({ post }) {
 
-export default connect()(TopPosts);
+    const posts = post.posts;
+    const myPosts = helpers.filter(posts, 'voteScore', 'desc', 3);
+    
+    return {
+        posts: myPosts
+    }
+}
+
+export default connect(mapStateToProps)(TopPosts);

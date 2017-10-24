@@ -20,7 +20,7 @@ import {
 
 const initialPostState = {
     category: '',
-    filter: '',
+    filter: 'voteScore',
     posts: [],
     currentPost: '',
     gotPosted: false
