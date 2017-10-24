@@ -2,7 +2,6 @@ import {
     combineReducers
 } from 'redux';
 import {
-    VOTE_ITEM,
     SET_POSTS,
     SORT_POSTS,
     POST_POSTED,
@@ -32,14 +31,12 @@ function post(state = initialPostState, action) {
         posts,
         category,
         filter,
-        currentPost,
-        id,
         post
     } = action;
 
     switch (action.type) {
         case SET_POSTS:
-            console.log('got posts');
+            
             return {
                 ...state,
                 ['posts']: posts,
@@ -52,7 +49,7 @@ function post(state = initialPostState, action) {
                 ...state,
                 ['filter']: filter
             }
-            console.log('sort posts');
+            
         case POST_POSTED:
             return {
                 ...state,
