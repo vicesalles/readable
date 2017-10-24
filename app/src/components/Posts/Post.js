@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import * as h from '../../utils/helpers'
 
 export default class Post extends Component {
     render() {
@@ -16,7 +17,7 @@ export default class Post extends Component {
                         <span className="badge badge-primary">{this.props.post.category}</span>
                         &nbsp;
                         <span className="badge badge-info">{this.props.post.voteScore} Votes</span>
-                        <span className="badge badge-light">{this.props.post.date}</span>
+                        <span className="badge badge-light">{h.toDate(this.props.post.timestamp)}</span>
 
                     </div>
                 </div>

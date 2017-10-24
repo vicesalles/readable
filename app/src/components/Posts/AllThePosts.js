@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import Post from './Post';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getPosts } from '../../actions';
-import * as api from '../../utils/api';
+import Post from './Post';
+import FilterTab from '../FilterTab';
+
 
 class AllThePosts extends Component {
 
@@ -26,7 +27,7 @@ class AllThePosts extends Component {
     }
 
     componentDidMount() {
-        this.props.setPosts(this.props.match.params.id || "");       
+        this.props.setPosts(this.props.match.params.id || "");
     }
 
     render() {
@@ -41,13 +42,10 @@ class AllThePosts extends Component {
                             <div className="col">
                                 <ul className="nav nav-pills card-header-pills">
                                     <li className="nav-item">
-                                        <a className="nav-link active">Popular
-                                                <span className="badge badge-secondary">up</span>
-                                        </a>
+                                        <FilterTab title="Popular" />
                                     </li>
                                     <li className="nav-item">
-                                        <a className="nav-link">Old
-                                                <span className="badge badge-secondary">up</span></a>
+                                        <FilterTab title="Old" />
                                     </li>
 
                                 </ul>
@@ -61,7 +59,7 @@ class AllThePosts extends Component {
                     </ul>
                     <div className="card-body">
                         <div className="container">
-                            <a className="btn btn-success">Comment Now</a>
+                           
                         </div>
                     </div>
                 </div>
