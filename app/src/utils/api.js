@@ -86,14 +86,16 @@ export function voteApost(id, vote) {
  * Deletes a post from the 'database'
  * @param String postId 
  */
-export function deletePost(postId){
+export function deletePost(postId) {
     return fetch(`http://localhost:3001/posts/${postId}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': 'w-want'
         }
-    }).then((r)=>{console.log('api',r)})
+    }).then((r) => {
+        console.log('api', r)
+    })
 }
 
 
@@ -151,7 +153,7 @@ export function voteAcomment(vote, id) {
 
 
 export function addComment(q) {
-        
+
     return fetch('http://localhost:3001/comments/', {
         method: 'POST',
         headers: {
@@ -159,5 +161,20 @@ export function addComment(q) {
             'Authorization': 'w-want'
         },
         body: JSON.stringify(q)
+    })
+}
+
+
+/**
+ * Deletes a comment from the 'database'
+ * @param String id 
+ */
+export function deleteComment(id) {
+    return fetch(`http://localhost:3001/comments/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'w-want'
+        }
     })
 }

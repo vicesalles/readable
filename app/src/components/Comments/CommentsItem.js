@@ -2,9 +2,15 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as utils from '../../utils/helpers';
-import { voteComment } from '../../actions';
+import { voteComment, deleteComment } from '../../actions';
 
 class CommentsItem extends Component {
+
+    delete = (id,parentId) => {
+        //Delete this comment
+        this.props.delete(id,parentId);
+    }
+
     render() {
 
         return (
@@ -34,7 +40,7 @@ class CommentsItem extends Component {
                             </span>
                             &nbsp;
                             <span className="badge badge-danger">
-                                <a className="pillbutton clicable">delete</a>
+                                <a onClick={() => this.delete(this.props.comment.id, this.props.comment.parentId)} className="pillbutton clicable">delete</a>
                             </span>
 
                         </span>
@@ -54,7 +60,8 @@ function mapStateToProps({ comment }, ownProps) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        submitVote: (id, vote) => dispatch(voteComment(id, vote))
+        submitVote: (id, vote) => dispatch(voteComment(id, vote)),
+        delete: (id,parentId) => dispatch(deleteComment(id,parentId))
     }
 }
 

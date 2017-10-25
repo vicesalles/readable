@@ -43,7 +43,10 @@ class Comments extends Component {
 
 function mapStateToProps({ comment }, ownProps) {
 
-    const comments = comment.comments;
+    const allComments = comment.comments;
+
+    const comments = allComments.filter((c)=>c.deleted===false);
+
     return {
         comments,
         ownProps

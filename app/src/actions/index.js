@@ -208,10 +208,7 @@ export function addComment(q) {
 
         }
 
-
         )
-
-
 
     }
 
@@ -219,13 +216,13 @@ export function addComment(q) {
 }
 
 
-
-export function deleteComment({
-        id
-    }) {
-    return {
-        type: DELETE_COMMENT,
-        id
+export function deleteComment(id, parentId) {
+    console.log('action: deleting comment');
+    return dispatch => {
+        api.deleteComment(id).then(() => {
+            console.log('comment deleted');
+            dispatch(getComments(parentId));
+        })
     }
 }
 
