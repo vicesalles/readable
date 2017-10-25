@@ -12,6 +12,7 @@ export const DELETE_POST = "DELETE_POST";
 export const EDIT_POST = "EDIT_POST";
 export const VOTE_POST = "VOTE_POST";
 export const POST_VOTED = "POST_VOTED";
+export const SET_FILTER = "SET_FILTER";
 
 //ACTIONS FOR COMMENTS
 export const GET_COMMENTS = 'GET_COMMENTS';
@@ -148,6 +149,21 @@ export function postVoted(voteScore) {
 }
 
 
+/**
+ * Sets the filter for displaying posts
+ * @param String filter 'voteScore'|'timestamp' 
+ * @param String direction 'asc'|'desc'
+ */
+
+export function setFilter(filter, direction) {
+    const myFilter = { f: filter, d: direction };
+    return {
+        type: SET_FILTER,
+        filter: myFilter
+    }
+}
+
+
 
 /**
  * COMMENTS
@@ -185,48 +201,48 @@ export function addComment(q) {
 
         api.addComment(q).then((res) => {
 
-                console.log('action', res);
-              
-                   dispatch(getComments(q.parentId));
-                    
-                }
+            console.log('action', res);
 
-
-            )
-
-
+            dispatch(getComments(q.parentId));
 
         }
+
+
+        )
+
 
 
     }
 
 
+}
 
-    export function deleteComment({
+
+
+export function deleteComment({
         id
     }) {
-        return {
-            type: DELETE_COMMENT,
-            id
-        }
+    return {
+        type: DELETE_COMMENT,
+        id
     }
+}
 
-    export function editComment({
+export function editComment({
+        id,
+    text
+    }) {
+    return {
+        type: EDIT_COMMENT,
         id,
         text
-    }) {
-        return {
-            type: EDIT_COMMENT,
-            id,
-            text
-        }
     }
+}
 
-    export function voteComment(id, vote) {
-        return (dispatch) => {
-            api.voteAcomment(vote, id).then((r) => {
-                dispatch(getComments(r.parentId));
-            })
-        }
+export function voteComment(id, vote) {
+    return (dispatch) => {
+        api.voteAcomment(vote, id).then((r) => {
+            dispatch(getComments(r.parentId));
+        })
     }
+}

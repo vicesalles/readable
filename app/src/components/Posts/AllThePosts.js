@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { getPosts } from '../../actions';
 import Post from './Post';
 import FilterTab from '../FilterTab';
+import * as h from '../../utils/helpers';
 
 
 class AllThePosts extends Component {
@@ -55,11 +56,11 @@ class AllThePosts extends Component {
                     </div>
 
                     <ul className="list-group list-group-flush">
-                        {this.parsePosts(this.props.post.posts)}
+                        {this.parsePosts(this.props.posts)}
                     </ul>
-                    <div className="card-body">
+                    <div className="card-footer">
                         <div className="container">
-                           
+
                         </div>
                     </div>
                 </div>
@@ -70,7 +71,11 @@ class AllThePosts extends Component {
 }
 
 function mapStateToProps({ post }) {
-    return { post }
+
+    // He de filtrar els resultats i fer-los sensibles als canvis de filtre.
+    const posts = h.filter(post.posts, post.filter.f, post.filter.d, 0);
+
+    return { posts }
 }
 
 function mapDispatchToProps(dispatch) {

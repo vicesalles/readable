@@ -13,13 +13,17 @@ import {
     WANNA_COMMENT,
     ADD_COMMENT,
     DELETE_COMMENT,
-    EDIT_COMMENT
+    EDIT_COMMENT,
+    SET_FILTER
 } from '../actions';
 
 
 const initialPostState = {
     category: '',
-    filter: 'voteScore',
+    filter: {
+        f: 'voteScore',
+        d: 'desc'
+    },
     posts: [],
     currentPost: '',
     gotPosted: false
@@ -36,7 +40,7 @@ function post(state = initialPostState, action) {
 
     switch (action.type) {
         case SET_POSTS:
-            
+
             return {
                 ...state,
                 ['posts']: posts,
@@ -49,7 +53,7 @@ function post(state = initialPostState, action) {
                 ...state,
                 ['filter']: filter
             }
-            
+
         case POST_POSTED:
             return {
                 ...state,
@@ -57,6 +61,13 @@ function post(state = initialPostState, action) {
             }
         case DELETE_POST:
             console.log('post deleted');
+        case SET_FILTER:
+
+            return {
+                ...state,
+                ['filter']: action.filter
+            }
+
         case POST_VOTED:
 
             return {

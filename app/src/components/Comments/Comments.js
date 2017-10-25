@@ -29,7 +29,7 @@ class Comments extends Component {
                     </ul>
                     <div className="card-body">
                         <div className="row">
-                            <a onClick={() => this.props.wannaComment()} className="btn btn-success btn-lg clicable" role="button">Comment</a>
+                            <a onClick={() => this.props.wannaComment()} className="btn btn-success clicable" role="button">Comment</a>
                         </div>
                     </div>
 

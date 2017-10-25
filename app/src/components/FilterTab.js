@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { setFilter } from '../actions';
+
 
 class FilterTab extends Component {
     state = {
@@ -8,9 +11,15 @@ class FilterTab extends Component {
     handleClick = (e) => {
 
         e.preventDefault();
-        const newState = this.state.direction === 'up' ? 'down' : 'up';
-        this.setState({ direction: newState });
+        //Checking filter
+        const filter = this.props.title === 'Popular' ? 'voteScore' : 'timestamp';
+        //Setting order
+        const direction = this.state.direction === 'up' ? 'down' : 'up';
 
+        this.setState({ direction });
+
+        
+        this.props.dispatch(setFilter(filter, direction));
     }
 
     render() {
@@ -20,4 +29,4 @@ class FilterTab extends Component {
     }
 }
 
-export default FilterTab;
+export default connect()(FilterTab);
