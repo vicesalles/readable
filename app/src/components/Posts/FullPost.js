@@ -12,14 +12,19 @@ class FullPost extends Component {
     }
 
     vote = (v) => {
+        //Getting Id
         const id = this.props.match.params.id;
         this.props.submitVote(id, v);
     }
 
     delete = () => {
+
+        //Needed parameters for the action.
         const id = this.props.match.params.id;
         const category = this.props.post.category;
+        //Send action
         this.props.delete(id, category);
+        //Send user to the main page.
         this.props.history.push('/');
 
     }
@@ -29,7 +34,6 @@ class FullPost extends Component {
     }
 
     render() {
-        // console.log('props',this.props.post);
         return (
             <div className="row">
 
