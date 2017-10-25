@@ -23,7 +23,7 @@ class CommentsItem extends Component {
                                 <a onClick={() => this.props.submitVote(this.props.comment.id, 'downVote')} className="pillbutton clicable">downVote</a>
                             </span>
                             &nbsp;
-                            <span className="badge badge-info">{this.props.comment.voteScore || 'n'} Votes</span>
+                            <span className="badge badge-info">{this.props.comment.voteScore || '0'} Votes</span>
                             &nbsp;
                             <span className="badge badge-light">{utils.toDate(this.props.comment.timestamp) || '17:14 01/10/17'}</span>
                         </span>

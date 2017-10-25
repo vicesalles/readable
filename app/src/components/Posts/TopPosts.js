@@ -25,8 +25,10 @@ class TopPosts extends Component {
 
 function mapStateToProps({ post }) {
 
-    const posts = post.posts;
-    const myPosts = helpers.filter(posts, 'voteScore', 'desc', 3);
+    const getPosts = post.posts;
+    const publish = getPosts.filter((p) => p.deleted === false);
+    const myPosts = helpers.filter(publish, 'voteScore', 'desc', 3);
+    
     
     return {
         posts: myPosts

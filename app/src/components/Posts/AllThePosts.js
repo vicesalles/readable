@@ -73,7 +73,9 @@ class AllThePosts extends Component {
 function mapStateToProps({ post }) {
 
     // He de filtrar els resultats i fer-los sensibles als canvis de filtre.
-    const posts = h.filter(post.posts, post.filter.f, post.filter.d, 0);
+    const getPosts = h.filter(post.posts, post.filter.f, post.filter.d, 0);
+
+    const posts = getPosts.filter((p) => p.deleted === false);
 
     return { posts }
 }

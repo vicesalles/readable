@@ -110,12 +110,13 @@ export function postPosted() {
 }
 
 
-export function deletePost({
-    id
-}) {
-    return {
-        type: DELETE_POST,
-        id
+export function deletePost(id, cat) {
+    console.log('action: deleting post');
+    return dispatch => {
+        api.deletePost(id).then(() => {
+            console.log('post deleted');
+            dispatch(getPosts(cat));
+        })
     }
 }
 export function editPost({

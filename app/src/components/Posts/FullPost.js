@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { votePost, wannaComment } from '../../actions';
+import { votePost, wannaComment, deletePost } from '../../actions';
 import * as utils from '../../utils/helpers';
 import * as api from '../../utils/api';
 
@@ -14,6 +14,18 @@ class FullPost extends Component {
     vote = (v) => {
         const id = this.props.match.params.id;
         this.props.submitVote(id, v);
+    }
+
+    delete = () => {
+        const id = this.props.match.params.id;
+        const category = this.props.post.category;
+        this.props.delete(id, category);
+        this.props.history.push('/');
+
+    }
+
+    componentDidMount() {
+        console.log('props', this.props.post);
     }
 
     render() {
@@ -34,7 +46,7 @@ class FullPost extends Component {
                                             <a className="pillbutton">Edit</a></span>
                                         &nbsp;
                                         <span className="badge badge-danger">
-                                            <a className="pillbutton">delete</a></span>
+                                            <a onClick={() => this.delete()} className="pillbutton clicable">delete</a></span>
                                     </div>
                                 </div>
                             </div>
@@ -81,7 +93,8 @@ function mapStateToProps({ post }) {
 function mapDispatchToProps(dispatch) {
     return {
         submitVote: (id, vote) => dispatch(votePost(id, vote)),
-        wannaComment: () => dispatch(wannaComment())
+        wannaComment: () => dispatch(wannaComment()),
+        delete: (id, cat) => dispatch(deletePost(id, cat))
     }
 }
 

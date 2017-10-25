@@ -82,6 +82,20 @@ export function voteApost(id, vote) {
     }).then((r) => r.json()).then((r) => r.voteScore)
 }
 
+/**
+ * Deletes a post from the 'database'
+ * @param String postId 
+ */
+export function deletePost(postId){
+    return fetch(`http://localhost:3001/posts/${postId}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'w-want'
+        }
+    }).then((r)=>{console.log('api',r)})
+}
+
 
 //#### COMMENTS
 
