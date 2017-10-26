@@ -21,10 +21,9 @@ export const WANNA_COMMENT = "WANNA_COMMENT";
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const COMMENT_ADDED = "COMMENT_ADDED";
 export const DELETE_COMMENT = "DELETE_COMMENT";
+export const WANNA_EDIT = "WANNA_EDIT";
 export const EDIT_COMMENT = "EDIT_COMMENT";
 export const VOTE_COMMENT = "VOTE_COMMENT";
-
-
 
 /**
  * POSTS
@@ -119,21 +118,15 @@ export function deletePost(id, cat) {
         })
     }
 }
-export function editPost({
-    id,
-    title,
-    body
-}) {
+export function editPost(id, post) {
     return {
         type: EDIT_POST,
         id,
-        title,
-        body
+        post
     }
 }
 
 export function votePost(id, vote) {
-
     return (dispatch) => {
         api.voteApost(id, vote).then((r) =>
             dispatch(postVoted(r))
@@ -142,13 +135,11 @@ export function votePost(id, vote) {
 }
 
 export function postVoted(voteScore) {
-
     return {
         type: POST_VOTED,
         voteScore
     }
 }
-
 
 /**
  * Sets the filter for displaying posts
@@ -164,22 +155,16 @@ export function setFilter(filter, direction) {
     }
 }
 
-
-
 /**
  * COMMENTS
  */
 
 export function getComments(parentId) {
-
     return (dispatch) => {
         api.getComments(parentId).then((comments) => {
             dispatch(gotComments(comments));
         })
-
     }
-
-
 }
 
 export function gotComments(comments) {
@@ -189,53 +174,65 @@ export function gotComments(comments) {
     }
 }
 
+//User wants to comment, view must be updated
 export function wannaComment() {
     return {
         type: WANNA_COMMENT
     }
 }
 
+/**
+ * Adding a comment
+ * @param Object q 
+ */
 export function addComment(q) {
 
     return dispatch => {
 
-
         api.addComment(q).then((res) => {
 
-            console.log('action', res);
-
+            //Dispatches get comments due to updating the state as needed.
             dispatch(getComments(q.parentId));
 
-        }
-
-        )
+        })
 
     }
-
 
 }
 
 
 export function deleteComment(id, parentId) {
-    console.log('action: deleting comment');
     return dispatch => {
         api.deleteComment(id).then(() => {
-            console.log('comment deleted');
+            //Updating the state is needed
             dispatch(getComments(parentId));
         })
     }
 }
 
-export function editComment({
-        id,
-    text
-    }) {
-    return {
-        type: EDIT_COMMENT,
-        id,
-        text
+export function wannaEdit(id) {
+    console.log('action', id);
+    return dispatch => {
+        api.singleComment(id).then((r) => {
+           dispatch( {
+                type: WANNA_EDIT,
+                comment: r
+            });
+        })
+    }
+
+
+}
+
+export function editComment(id, parentId, comment) {
+    return dispatch => {
+        api.editComment(id, comment).then(() => {
+            dispatch(getComments(parentId));
+        })
     }
 }
+
+
 
 export function voteComment(id, vote) {
     return (dispatch) => {

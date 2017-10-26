@@ -13,7 +13,7 @@ import {
     WANNA_COMMENT,
     ADD_COMMENT,
     DELETE_COMMENT,
-    EDIT_COMMENT,
+    WANNA_EDIT,
     SET_FILTER
 } from '../actions';
 
@@ -92,7 +92,11 @@ function post(state = initialPostState, action) {
 
 const initialCommentState = {
     comments: [],
-    commenting: false
+    commenting: false,
+    edit: {
+        editing: false,
+        comment: {}
+    }
 }
 
 function comment(state = initialCommentState, action) {
@@ -103,7 +107,11 @@ function comment(state = initialCommentState, action) {
             return {
                 ...state,
                 ['comments']: action.comments,
-                commenting: false
+                commenting: false,
+                edit:{
+                    editing:false,
+                    comment:{}
+                }
             }
         case WANNA_COMMENT:
             console.log('wanna comment');
@@ -111,6 +119,16 @@ function comment(state = initialCommentState, action) {
                 ...state,
                 commenting: true
             }
+        case WANNA_EDIT:
+        console.log('reducer wanna edit');
+            return{
+                ...state,
+                edit:{
+                    editing:true,
+                    comment:action.comment
+                }
+            }
+
         default:
             return state;
     }

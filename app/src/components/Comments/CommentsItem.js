@@ -2,13 +2,18 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as utils from '../../utils/helpers';
-import { voteComment, deleteComment } from '../../actions';
+import { wannaEdit, voteComment, deleteComment } from '../../actions';
 
 class CommentsItem extends Component {
 
     delete = (id,parentId) => {
         //Delete this comment
         this.props.delete(id,parentId);
+    }
+
+    edit = () =>{
+        console.log('wanna edit');
+        this.props.edit(this.props.id);
     }
 
     render() {
@@ -36,7 +41,7 @@ class CommentsItem extends Component {
                         |
                     <span>
                             <span className="badge badge-success">
-                                <a className="pillbutton clicable">Edit</a>
+                                <a onClick={()=>this.edit()} className="pillbutton clicable">Edit</a>
                             </span>
                             &nbsp;
                             <span className="badge badge-danger">
@@ -61,7 +66,8 @@ function mapStateToProps({ comment }, ownProps) {
 function mapDispatchToProps(dispatch) {
     return {
         submitVote: (id, vote) => dispatch(voteComment(id, vote)),
-        delete: (id,parentId) => dispatch(deleteComment(id,parentId))
+        delete: (id,parentId) => dispatch(deleteComment(id,parentId)),
+        edit: (id)=> dispatch(wannaEdit(id))
     }
 }
 

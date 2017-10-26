@@ -8,7 +8,7 @@ class Comments extends Component {
     parseComments = (array) => {
 
         const res = array.map((c) => {
-            return <CommentsItem key={c.id} comment={c} />
+            return <CommentsItem key={c.id} id={c.id} comment={c} />
         })
 
         return res;

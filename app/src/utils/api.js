@@ -82,6 +82,23 @@ export function voteApost(id, vote) {
     }).then((r) => r.json()).then((r) => r.voteScore)
 }
 
+
+/**
+ * Modifies a given post
+ * @param Object post 
+ */
+export function editPost(id, post) {
+    return fetch(`http://localhost:3001/posts/${id}`), {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'w-want'
+        },
+        body: JSON.stringify(post)
+    }
+}
+
+
 /**
  * Deletes a post from the 'database'
  * @param String postId 
@@ -130,6 +147,37 @@ export function postComment(comment, parent) {
     }).then((r) => console.log(r))
 
 }
+
+/**
+ * Get a single comment
+ * @param String id 
+ */
+export function singleComment(id) {
+    console.log('api',id);
+    return fetch(`http://localhost:3001/comments/${id}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'w-want'
+        }
+    }).then((r) => {return r.json()})
+
+
+}
+
+export function editComment(id, comment) {
+
+    return fetch(`http://localhost:3001/comments/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'w-want'
+        },
+        body: JSON.stringify(comment)
+    })
+
+}
+
 
 export function voteAcomment(vote, id) {
     //The object that's need to be passed
