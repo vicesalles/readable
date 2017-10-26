@@ -12,7 +12,6 @@ import {
     GOT_COMMENTS,
     WANNA_COMMENT,
     ADD_COMMENT,
-    DELETE_COMMENT,
     WANNA_EDIT,
     SET_FILTER
 } from '../actions';
@@ -62,6 +61,7 @@ function post(state = initialPostState, action) {
             }
         case DELETE_POST:
             console.log('post deleted');
+
         case SET_FILTER:
 
             return {

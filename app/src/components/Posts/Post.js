@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 import * as h from '../../utils/helpers'
 
 export default class Post extends Component {

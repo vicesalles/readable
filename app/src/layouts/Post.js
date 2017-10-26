@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import * as actions from '../actions';
-import * as utils from '../utils/helpers';
-import * as api from '../utils/api';
 
 import Header from '../components/Header';
 import FullPost from '../components/Posts/FullPost';

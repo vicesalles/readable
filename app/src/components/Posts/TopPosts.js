@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Post from './Post';
 import { connect } from 'react-redux';
-import { getPosts } from '../../actions'
 import * as helpers from '../../utils/helpers';
 
 class TopPosts extends Component {

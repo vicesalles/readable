@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import * as hlp from '../../utils/helpers';
 import { editPost } from '../../actions';
 
 class EditPost extends Component {

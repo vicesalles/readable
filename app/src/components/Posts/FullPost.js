@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { votePost, wannaComment, deletePost, wannaEditPost } from '../../actions';
 import * as utils from '../../utils/helpers';
-import * as api from '../../utils/api';
 
 import EditPost from '../Forms/EditPost';
 

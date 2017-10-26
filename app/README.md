@@ -14,3 +14,5 @@ After installing and set up running the server, just follow the next steps with 
 2) NPM RUN
 
 (yarn also works as this has been created with the create-react-app starter)
+
+
