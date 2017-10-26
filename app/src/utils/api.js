@@ -88,14 +88,14 @@ export function voteApost(id, vote) {
  * @param Object post 
  */
 export function editPost(id, post) {
-    return fetch(`http://localhost:3001/posts/${id}`), {
+    return fetch(`http://localhost:3001/posts/${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': 'w-want'
         },
         body: JSON.stringify(post)
-    }
+    })
 }
 
 

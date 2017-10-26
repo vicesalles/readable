@@ -48,7 +48,7 @@ class EditComment extends Component {
                                 <div className="form-group">
                                     <input type="text" value={this.state.owner} disabled />
                                 </div>
-                                <button onClick={(e) => { this.handleSubmit(e) }} type="submit" className="btn btn-primary btn-sm clicable">Submit</button>
+                                <button onClick={(e) => { this.handleSubmit(e) }} type="submit" className="btn btn-primary btn-sm clicable">Edit</button>
 
                             </form>
                         </div>

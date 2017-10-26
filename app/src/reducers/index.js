@@ -9,6 +9,7 @@ import {
     POST_VOTED,
     DELETE_POST,
     EDIT_POST,
+    WANNA_EDIT_POST,
     GOT_COMMENTS,
     WANNA_COMMENT,
     ADD_COMMENT,
@@ -26,7 +27,8 @@ const initialPostState = {
     },
     posts: [],
     currentPost: '',
-    gotPosted: false
+    gotPosted: false,
+    editing: false
 }
 
 function post(state = initialPostState, action) {
@@ -80,9 +82,15 @@ function post(state = initialPostState, action) {
             }
 
         case SET_CURRENT_POST:
-            console.log('setting current post');
             return { ...state,
-                ['currentPost']: post
+                ['currentPost']: post,
+                editing: false
+            }
+
+        case WANNA_EDIT_POST:
+            return {
+                ...state,
+                editing: true
             }
         default:
             return state;
@@ -108,9 +116,9 @@ function comment(state = initialCommentState, action) {
                 ...state,
                 ['comments']: action.comments,
                 commenting: false,
-                edit:{
-                    editing:false,
-                    comment:{}
+                edit: {
+                    editing: false,
+                    comment: {}
                 }
             }
         case WANNA_COMMENT:
@@ -120,12 +128,12 @@ function comment(state = initialCommentState, action) {
                 commenting: true
             }
         case WANNA_EDIT:
-        console.log('reducer wanna edit');
-            return{
+            console.log('reducer wanna edit');
+            return {
                 ...state,
-                edit:{
-                    editing:true,
-                    comment:action.comment
+                edit: {
+                    editing: true,
+                    comment: action.comment
                 }
             }
 
