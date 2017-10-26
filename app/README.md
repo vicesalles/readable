@@ -10,8 +10,12 @@ It needs a simple dummy server to work. Server can be found here: [node dummy se
 
 After installing and set up running the server, just follow the next steps with this app:
 
-1) NPM INSTALL
-2) NPM RUN
+1) ENTER APP FOLTER AND RUN NPM INSTALL
+2) ENTER SERVER FOLDER RUN NPM INSTALL
+3) START THE SERVER NPM START
+4) START THE APP NPM START
+
+UI folder contains static Bootstrap materials
 
 (yarn also works as this has been created with the create-react-app starter)
 
