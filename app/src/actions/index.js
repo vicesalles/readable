@@ -10,6 +10,7 @@ export const ADD_POST = 'ADD_POST';
 export const POST_POSTED = "POST_POSTED"
 export const DELETE_POST = "DELETE_POST";
 export const EDIT_POST = "EDIT_POST";
+export const WANNA_EDIT_POST = "WANNA_EDIT_POST";
 export const VOTE_POST = "VOTE_POST";
 export const POST_VOTED = "POST_VOTED";
 export const SET_FILTER = "SET_FILTER";
@@ -77,7 +78,6 @@ export function setCurrentPost(post) {
         post
     }
 
-
 }
 
 export function sortPosts({
@@ -110,7 +110,7 @@ export function postPosted() {
 
 
 export function deletePost(id, cat) {
-    console.log('action: deleting post');
+
     return dispatch => {
         api.deletePost(id).then(() => {
             console.log('post deleted');
@@ -118,28 +118,34 @@ export function deletePost(id, cat) {
         })
     }
 }
-export function editPost(id, post) {
+
+// Inits UI for editing a Post
+export function wannaEditPost() {
     return {
-        type: EDIT_POST,
-        id,
-        post
+        type: WANNA_EDIT_POST
+    }
+}
+
+//Submiting Edition and restoring UI
+export function editPost(id, post) {
+    return dispatch => {
+        api.editPost(id, post).then((r) => {
+            dispatch(getCurrentPost(id))
+        })
     }
 }
 
 export function votePost(id, vote) {
     return (dispatch) => {
         api.voteApost(id, vote).then((r) =>
-            dispatch(postVoted(r))
+            dispatch({
+                type: POST_VOTED,
+                voteScore: r
+            })
         )
     }
 }
 
-export function postVoted(voteScore) {
-    return {
-        type: POST_VOTED,
-        voteScore
-    }
-}
 
 /**
  * Sets the filter for displaying posts
@@ -211,10 +217,10 @@ export function deleteComment(id, parentId) {
 }
 
 export function wannaEdit(id) {
-    console.log('action', id);
+
     return dispatch => {
         api.singleComment(id).then((r) => {
-           dispatch( {
+            dispatch({
                 type: WANNA_EDIT,
                 comment: r
             });
