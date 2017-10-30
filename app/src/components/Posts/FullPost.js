@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { votePost, wannaComment, deletePost, wannaEditPost } from '../../actions';
 import * as utils from '../../utils/helpers';
 
+import Broken from '../../layouts/Broken';
 import EditPost from '../Forms/EditPost';
 
 class FullPost extends Component {
@@ -33,73 +34,77 @@ class FullPost extends Component {
     edit = () => {
         this.props.edit();
     }
-    
+
 
     render() {
 
+      
         if (this.props.editing) {
 
             return <EditPost />
 
-        } else {
+        //If the post has no body, it doesn't exists anymore    
+        } else if (this.props.post.body === undefined || this.props.post.body === "") { 
+
+           return <h1>No such post</h1> 
+
+    } else {
 
 
+    return (
+        <div className="row">
 
-
-            return (
-                <div className="row">
-
-                    <div className="col">
-                        <div className="card">
-                            <div className="card-header">
-                                <div className="row">
-                                    <div className="col-10">
-                                        <h1>{this.props.post.title || 'Title'}</h1>
-                                    </div>
-                                    <div className="col ">
-                                        <div className="container">
-                                            <span className="badge badge-success">
-                                                <a onClick={() => this.edit()} className="pillbutton clicable">Edit</a></span>
-                                            &nbsp;
-                                        <span className="badge badge-danger">
-                                                <a onClick={() => this.delete()} className="pillbutton clicable">delete</a></span>
-                                        </div>
-                                    </div>
-                                </div>
+            <div className="col">
+                <div className="card">
+                    <div className="card-header">
+                        <div className="row">
+                            <div className="col-10">
+                                <h1>{this.props.post.title}</h1>
                             </div>
-
-                            <div className="card-body">
-                                <p>{this.props.post.body || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque cursus dolor fermentum, placeratsapien hendrerit.'}</p>
-
-                            </div>
-                            <div className="card-footer">
+                            <div className="col ">
                                 <div className="container">
-                                    <div className="row">
-                                        <div className="col-8">
-                                            <a onClick={() => this.props.wannaComment()} className="btn btn-success clicable">Comment</a>
-                                            &nbsp;
-                                        <a onClick={() => this.vote('upVote')} className="btn btn-success clicable">UpVote</a>
-                                            &nbsp;
-                                        <a onClick={() => this.vote('downVote')} className="btn btn-success clicable">DownVote</a>
-                                        </div>
-                                        <div className="col-4">
-
-                                            <span className="badge badge-primary">{this.props.post.category || 'Category'}</span>
-                                            &nbsp;
-                                        <span className="badge badge-info">{this.props.post.voteScore || '0'} Votes</span>
-                                            &nbsp;
-                                        <span className="badge badge-light">{utils.toDate(this.props.post.timestamp) || '17:14 01/10/17'}</span>
-
-                                        </div>
-                                    </div>
+                                    <span className="badge badge-success">
+                                        <a onClick={() => this.edit()} className="pillbutton clicable">Edit</a></span>
+                                    &nbsp;
+                                        <span className="badge badge-danger">
+                                        <a onClick={() => this.delete()} className="pillbutton clicable">delete</a></span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
+                    <div className="card-body">
+                        <p>{this.props.post.body}</p>
+
+                    </div>
+                    <div className="card-footer">
+                        <div className="container">
+                            <div className="row">
+                                <div className="col-8">
+                                    <a onClick={() => this.props.wannaComment()} className="btn btn-success clicable">Comment</a>
+                                    &nbsp;
+                                        <a onClick={() => this.vote('upVote')} className="btn btn-success clicable">UpVote</a>
+                                    &nbsp;
+                                        <a onClick={() => this.vote('downVote')} className="btn btn-success clicable">DownVote</a>
+                                </div>
+                                <div className="col-4">
+
+                                    <span className="badge badge-primary">{this.props.post.category}</span>
+                                    &nbsp;
+                                        <span className="badge badge-info">{this.props.post.voteScore || '0'} Votes</span>
+                                    &nbsp;
+                                        <span className="badge badge-light">{utils.toDate(this.props.post.timestamp)}</span>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            )
-        }
+            </div>
+
+        </div>
+    )
+}
     }
 }
 
