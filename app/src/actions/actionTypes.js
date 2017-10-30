@@ -1,0 +1,20 @@
+//ACTIONS FOR POSTS
+export const GET_POSTS = "GET_POSTS";
+export const SORT_POSTS = "SORT_POSTS";
+export const ADD_POST = 'ADD_POST';
+export const GET_CURRENT_POST = "GET_CURRENT_POST";
+export const DELETE_POST = "DELETE_POST";
+export const EDIT_POST = "EDIT_POST";
+export const WANNA_EDIT_POST = "WANNA_EDIT_POST";
+export const VOTE_POST = "VOTE_POST";
+export const SET_FILTER = "SET_FILTER";
+
+//ACTIONS FOR COMMENTS
+export const GET_COMMENTS = 'GET_COMMENTS';
+export const WANNA_COMMENT = "WANNA_COMMENT";
+export const ADD_COMMENT = 'ADD_COMMENT';
+export const COMMENT_ADDED = "COMMENT_ADDED";
+export const DELETE_COMMENT = "DELETE_COMMENT";
+export const WANNA_EDIT_COMMENT = "WANNA_EDIT_COMMENT";
+export const EDIT_COMMENT = "EDIT_COMMENT";
+export const VOTE_COMMENT = "VOTE_COMMENT";

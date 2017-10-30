@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as utils from '../../utils/helpers';
-import { wannaEdit, voteComment, deleteComment } from '../../actions';
+import { wannaEditComment, voteComment, deleteComment } from '../../actions';
 
 class CommentsItem extends Component {
 
@@ -67,7 +67,7 @@ function mapDispatchToProps(dispatch) {
     return {
         submitVote: (id, vote) => dispatch(voteComment(id, vote)),
         delete: (id,parentId) => dispatch(deleteComment(id,parentId)),
-        edit: (id)=> dispatch(wannaEdit(id))
+        edit: (id)=> dispatch(wannaEditComment(id))
     }
 }
 

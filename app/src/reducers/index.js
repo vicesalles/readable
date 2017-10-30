@@ -2,19 +2,18 @@ import {
     combineReducers
 } from 'redux';
 import {
-    SET_POSTS,
+    GET_POSTS,
     SORT_POSTS,
-    POST_POSTED,
-    SET_CURRENT_POST,
-    POST_VOTED,
-    DELETE_POST,
+    ADD_POST,
+    GET_CURRENT_POST,
+    VOTE_POST,
     WANNA_EDIT_POST,
-    GOT_COMMENTS,
+    GET_COMMENTS,
     WANNA_COMMENT,
     ADD_COMMENT,
-    WANNA_EDIT,
+    WANNA_EDIT_COMMENT,
     SET_FILTER
-} from '../actions';
+} from '../actions/actionTypes';
 
 
 const initialPostState = {
@@ -39,7 +38,7 @@ function post(state = initialPostState, action) {
     } = action;
 
     switch (action.type) {
-        case SET_POSTS:
+        case GET_POSTS:
 
             return {
                 ...state,
@@ -54,13 +53,11 @@ function post(state = initialPostState, action) {
                 ['filter']: filter
             }
 
-        case POST_POSTED:
+        case ADD_POST:
             return {
                 ...state,
                 ['gotPosted']: true
             }
-        case DELETE_POST:
-            console.log('post deleted');
 
         case SET_FILTER:
 
@@ -69,7 +66,7 @@ function post(state = initialPostState, action) {
                 ['filter']: action.filter
             }
 
-        case POST_VOTED:
+        case VOTE_POST:
 
             return {
                 ...state,
@@ -80,7 +77,7 @@ function post(state = initialPostState, action) {
 
             }
 
-        case SET_CURRENT_POST:
+        case GET_CURRENT_POST:
             return { ...state,
                 ['currentPost']: post,
                 editing: false
@@ -110,7 +107,7 @@ function comment(state = initialCommentState, action) {
     switch (action.type) {
         case ADD_COMMENT:
             console.log('added comment');
-        case GOT_COMMENTS:
+        case GET_COMMENTS:
             return {
                 ...state,
                 ['comments']: action.comments,
@@ -126,8 +123,8 @@ function comment(state = initialCommentState, action) {
                 ...state,
                 commenting: true
             }
-        case WANNA_EDIT:
-            console.log('reducer wanna edit');
+        case WANNA_EDIT_COMMENT:
+           
             return {
                 ...state,
                 edit: {

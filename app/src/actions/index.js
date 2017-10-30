@@ -1,38 +1,30 @@
 import * as api from '../utils/api';
-
-//ACTIONS FOR POSTS
-export const GET_CURRENT_POST = "GET_CURRENT_POST";
-export const SET_CURRENT_POST = "SET_CURRENT_POST";
-export const GET_POSTS = "GET_POSTS";
-export const SET_POSTS = "SET_POSTS";
-export const SORT_POSTS = "SORT_POSTS";
-export const ADD_POST = 'ADD_POST';
-export const POST_POSTED = "POST_POSTED"
-export const DELETE_POST = "DELETE_POST";
-export const EDIT_POST = "EDIT_POST";
-export const WANNA_EDIT_POST = "WANNA_EDIT_POST";
-export const VOTE_POST = "VOTE_POST";
-export const POST_VOTED = "POST_VOTED";
-export const SET_FILTER = "SET_FILTER";
-
-//ACTIONS FOR COMMENTS
-export const GET_COMMENTS = 'GET_COMMENTS';
-export const GOT_COMMENTS = 'GOT_COMMENTS';
-export const WANNA_COMMENT = "WANNA_COMMENT";
-export const ADD_COMMENT = 'ADD_COMMENT';
-export const COMMENT_ADDED = "COMMENT_ADDED";
-export const DELETE_COMMENT = "DELETE_COMMENT";
-export const WANNA_EDIT = "WANNA_EDIT";
-export const EDIT_COMMENT = "EDIT_COMMENT";
-export const VOTE_COMMENT = "VOTE_COMMENT";
+import {
+    GET_POSTS,
+    GET_CURRENT_POST,
+    SORT_POSTS,
+    ADD_POST,
+    WANNA_EDIT_POST,
+    VOTE_POST,
+    EDIT_POST,
+    DELETE_POST,
+    SET_FILTER,
+    GET_COMMENTS,
+    WANNA_COMMENT,
+    WANNA_EDIT_COMMENT,
+    ADD_COMMENT,
+    VOTE_COMMENT,
+    EDIT_COMMENT,
+    DELETE_COMMENT
+} from './actionTypes';
 
 /**
  * POSTS
  */
 
 /**
- * Thunk: async call for getting posts of the API
- * @param String category 
+ * Thunk: async call for getting posts from the API
+ * @param String category If no category passed it returns all of the posts
  */
 export function getPosts(category) {
     let cat;
@@ -40,81 +32,76 @@ export function getPosts(category) {
     return (dispatch) => {
 
         api.getPosts(cat).then((res) => res.json()).then((posts) => {
-            const res = {
-                posts,
-                category
-            };
-            dispatch(setPosts(res));
+            dispatch({
+                type: GET_POSTS,
+                category,
+                posts
+            });
         })
     }
 }
 
 /**
- * Passes the getPosts results to the Store
- * @param Object action
+ * Thunk: Get the post data for a given ID
+ * @param String id 
  */
-export function setPosts(action) {
-    return {
-        type: SET_POSTS,
-        category: action.category,
-        posts: action.posts
-    }
-};
-
 export function getCurrentPost(id) {
 
     return (dispatch) => {
         api.getPost(id).then((res) => res.json()).then((post) => {
-            dispatch(setCurrentPost(post))
+            dispatch({
+                type: GET_CURRENT_POST,
+                post
+            })
         })
     }
 
 }
 
-export function setCurrentPost(post) {
-
-    return {
-        type: SET_CURRENT_POST,
-        post
-    }
-
-}
-
-export function sortPosts({
-    filter
-}) {
+/**
+ * Organize posts by given Filter
+ * @param Object filter 
+ */
+export function sortPosts({filter}) {
     return {
         type: SORT_POSTS,
         filter
     }
 }
 
+/**
+ * Adds a post
+ * @param Object post 
+ */
 export function addPost(post) {
 
     return (dispatch) => {
 
         api.addPost(post).then(() => {
-            dispatch(postPosted())
+            dispatch({
+                type: ADD_POST
+            })
         })
 
     }
 
 }
 
-
-export function postPosted() {
-    return {
-        type: POST_POSTED
-    }
-}
-
-
+/**
+ * Deletes a post, his comments and calls getPosts for refreshing the state
+ * @param String id 
+ * @param String at Category 
+ */
 export function deletePost(id, cat) {
 
     return dispatch => {
         api.deletePost(id).then(() => {
-            console.log('post deleted');
-            dispatch(getPosts(cat));
+            //Delete all the comments fot the psot
+            api.deleteAllComments(id).then(() =>
+                //Uptade state by getting the posts again
+                dispatch(getPosts(cat))
+            )
+
         })
     }
 }
@@ -139,22 +126,23 @@ export function votePost(id, vote) {
     return (dispatch) => {
         api.voteApost(id, vote).then((r) =>
             dispatch({
-                type: POST_VOTED,
+                type: VOTE_POST,
                 voteScore: r
             })
         )
     }
 }
 
-
 /**
  * Sets the filter for displaying posts
  * @param String filter 'voteScore'|'timestamp' 
  * @param String direction 'asc'|'desc'
  */
-
 export function setFilter(filter, direction) {
-    const myFilter = { f: filter, d: direction };
+    const myFilter = {
+        f: filter,
+        d: direction
+    };
     return {
         type: SET_FILTER,
         filter: myFilter
@@ -168,15 +156,11 @@ export function setFilter(filter, direction) {
 export function getComments(parentId) {
     return (dispatch) => {
         api.getComments(parentId).then((comments) => {
-            dispatch(gotComments(comments));
+            dispatch({
+                type: GET_COMMENTS,
+                comments
+            });
         })
-    }
-}
-
-export function gotComments(comments) {
-    return {
-        type: GOT_COMMENTS,
-        comments
     }
 }
 
@@ -216,12 +200,12 @@ export function deleteComment(id, parentId) {
     }
 }
 
-export function wannaEdit(id) {
+export function wannaEditComment(id) {
 
     return dispatch => {
         api.singleComment(id).then((r) => {
             dispatch({
-                type: WANNA_EDIT,
+                type: WANNA_EDIT_COMMENT,
                 comment: r
             });
         })
@@ -238,8 +222,11 @@ export function editComment(id, parentId, comment) {
     }
 }
 
-
-
+/**
+ * Add a vote to a given comment
+ * @param String id 
+ * @param String vote "upVote" || "downVote" 
+ */
 export function voteComment(id, vote) {
     return (dispatch) => {
         api.voteAcomment(vote, id).then((r) => {
