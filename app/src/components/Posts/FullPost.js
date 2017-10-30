@@ -4,7 +4,6 @@ import { withRouter } from 'react-router-dom';
 import { votePost, wannaComment, deletePost, wannaEditPost } from '../../actions';
 import * as utils from '../../utils/helpers';
 
-import Broken from '../../layouts/Broken';
 import EditPost from '../Forms/EditPost';
 
 class FullPost extends Component {
