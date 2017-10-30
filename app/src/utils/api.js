@@ -82,7 +82,6 @@ export function voteApost(id, vote) {
     }).then((r) => r.json()).then((r) => r.voteScore)
 }
 
-
 /**
  * Modifies a given post
  * @param Object post 
@@ -98,7 +97,6 @@ export function editPost(id, post) {
     })
 }
 
-
 /**
  * Deletes a post from the 'database'
  * @param String postId 
@@ -110,10 +108,11 @@ export function deletePost(postId) {
             'Content-Type': 'application/json',
             'Authorization': 'w-want'
         }
-    }).then((r) => {
-        console.log('api', r)
     })
 }
+
+
+
 
 
 //#### COMMENTS
@@ -224,5 +223,16 @@ export function deleteComment(id) {
             'Content-Type': 'application/json',
             'Authorization': 'w-want'
         }
+    })
+}
+
+/**
+ * Delete all comments for a given parentID
+ */
+export function deleteAllComments(parentId){
+    getComments(parentId).then((comments)=>{
+        comments.map((m)=>{
+           return deleteComment(m.id);
+        })
     })
 }
