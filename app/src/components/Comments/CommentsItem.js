@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as utils from '../../utils/helpers';
 import { wannaEditComment, voteComment, deleteComment } from '../../actions';
+import {FaUser,FaUserSecret,FaThumbsUp,FaThumbsDown} from 'react-icons/lib/fa/';
 
 class CommentsItem extends Component {
 
@@ -27,11 +28,16 @@ class CommentsItem extends Component {
                     <div className="container">
                         <span>
                             <span className="badge badge-success">
-                                <a onClick={() => this.props.submitVote(this.props.comment.id, 'upVote')} className="pillbutton clicable">UpVote</a>
+                                <a onClick={() => this.props.submitVote(this.props.comment.id, 'upVote')} className="pillbutton clicable"><FaThumbsUp/></a>
                             </span>
                             &nbsp;
                             <span className="badge badge-danger">
-                                <a onClick={() => this.props.submitVote(this.props.comment.id, 'downVote')} className="pillbutton clicable">downVote</a>
+                                <a onClick={() => this.props.submitVote(this.props.comment.id, 'downVote')} className="pillbutton clicable"><FaThumbsDown/></a>
+                            </span>
+                            <span className="badge badge-light">
+                            {this.props.comment.author? <FaUser/>:<FaUserSecret/>}
+                            &nbsp;
+                            {this.props.comment.author}
                             </span>
                             &nbsp;
                             <span className="badge badge-info">{this.props.comment.voteScore || '0'} Votes</span>
