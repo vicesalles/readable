@@ -1,3 +1,18 @@
+//#### CATEGORIES
+
+/**
+ * @description Gets all the avaible categories
+ * @returns Array of avaible categories in the server
+ */
+export function getCategories(){
+    return fetch('http://localhost:3001/categories', {
+        method: 'GET',
+        headers: {
+            'Authorization': 'w-want'
+        }
+    }).then((r) => r)
+}
+
 //#### POSTS
 
 /**

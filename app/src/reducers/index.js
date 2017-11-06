@@ -12,11 +12,13 @@ import {
     WANNA_COMMENT,
     ADD_COMMENT,
     WANNA_EDIT_COMMENT,
-    SET_FILTER
+    SET_FILTER,
+    GET_CATEGORIES
 } from '../actions/actionTypes';
 
 
 const initialPostState = {
+    categories: [],
     category: '',
     filter: {
         f: 'voteScore',
@@ -38,6 +40,16 @@ function post(state = initialPostState, action) {
     } = action;
 
     switch (action.type) {
+
+        case GET_CATEGORIES:
+
+            const {categories} = action;
+
+            return {
+                ...state,
+                ['categories']: categories
+            }
+
         case GET_POSTS:
 
             return {
@@ -124,7 +136,7 @@ function comment(state = initialCommentState, action) {
                 commenting: true
             }
         case WANNA_EDIT_COMMENT:
-           
+
             return {
                 ...state,
                 edit: {

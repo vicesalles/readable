@@ -15,8 +15,28 @@ import {
     ADD_COMMENT,
     VOTE_COMMENT,
     EDIT_COMMENT,
-    DELETE_COMMENT
+    DELETE_COMMENT,
+    GET_CATEGORIES
 } from './actionTypes';
+
+
+/**
+ * CATEGORIES
+ */
+
+ export function getCategories(){
+    return (dispatch)=>{
+        api.getCategories().then((res)=>res.json()).then((r)=>{
+            console.log('categories ACTION',r);
+            const categories = r.categories;
+            dispatch({
+                type:GET_CATEGORIES,
+                categories
+            })
+        })
+    }
+ }
+
 
 /**
  * POSTS

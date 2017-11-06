@@ -1,7 +1,32 @@
 import React,{Component} from 'react';
 import CategoriesItem from './CategoriesItem';
+import {connect} from 'react-redux';
+import {getCategories} from '../../actions';
+import { withRouter } from 'react-router-dom';
 
-export default class CategoriesCard extends Component{
+class CategoriesCard extends Component{
+
+    componentDidMount(){
+        this.props.dispatch(getCategories());        
+    }
+
+    /**
+     * @description It turns Categories props into React component CategoriesItem
+     * @param Array cats 
+     * @return react component
+     */
+    categories = (cats) =>{
+    
+        if(cats===undefined){
+            return (<p>Loading...</p>);
+        }else{
+
+      return cats.map((cat,i)=>{
+            return(<CategoriesItem key={cat+i} text={cat.name} to={cat.path}/>);
+        })
+    }
+    }
+ 
     render(){
         return(
             <div className="col-4">
@@ -11,9 +36,7 @@ export default class CategoriesCard extends Component{
                     </div>
                     <ul className="list-group list-group-flush">
                 
-                        <CategoriesItem text="React" to="react"/>
-                        <CategoriesItem text="Redux" to="redux"/>
-                        <CategoriesItem text="Udacity" to="udacity"/>                        
+                        {this.categories(this.props.categories)}             
 
                       </ul>
                 </div>
@@ -21,3 +44,12 @@ export default class CategoriesCard extends Component{
         );
     }
 }
+
+function mapStateToProps({post}){
+    
+    const categories = post.categories;
+    return{categories}
+
+}
+
+export default withRouter(connect(mapStateToProps)(CategoriesCard));
