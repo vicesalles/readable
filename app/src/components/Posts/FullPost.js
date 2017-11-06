@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { votePost, wannaComment, deletePost, wannaEditPost } from '../../actions';
 import * as utils from '../../utils/helpers';
+import {FaUser,FaUserSecret,FaThumbsUp,FaThumbsDown} from 'react-icons/lib/fa/';
 
 import EditPost from '../Forms/EditPost';
 
@@ -59,6 +60,14 @@ class FullPost extends Component {
                         <div className="row">
                             <div className="col-10">
                                 <h1>{this.props.post.title}</h1>
+                                <p>
+                                    <span className="badge badge-light">
+                                        {this.props.post.author? <FaUser/>:<FaUserSecret/>}
+                                        &nbsp;
+                                        {this.props.post.author}
+                                    </span>
+                                </p>
+                                
                             </div>
                             <div className="col ">
                                 <div className="container">

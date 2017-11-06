@@ -19,13 +19,14 @@ class NewComment extends Component {
         e.preventDefault();
 
         //Creating the comment object
-        let q = {}
-        q.timestamp = Date.now();
-        q.id = utils.guid();
-        q.body = this.state.comment;
-        q.owner = this.state.owner;
-        q.parentId = this.props.match.params.id;
-       
+        const q = {
+            timestamp:Date.now(),
+            id:utils.guid(),
+            body:this.state.comment,
+            author:this.state.owner,
+            parentId:this.props.match.params.id
+        }
+              
         this.props.dispatch(addComment(q));
 
     }

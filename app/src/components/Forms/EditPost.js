@@ -29,10 +29,10 @@ class EditPost extends Component {
 
         post.title = this.state.title;
         post.body = this.state.body;
-        
+
 
         //Dispatching addPost ACTION
-        this.props.dispatch(editPost(id,post));
+        this.props.dispatch(editPost(id, post));
 
     }
 
@@ -50,12 +50,13 @@ class EditPost extends Component {
     }
 
     componentDidMount() {
+        const { title, body, owner, category } = this.props.p;
         this.setState({
-            title: this.props.p.title,
-            body: this.props.p.body,
-            owner: this.props.p.owner,
-            category: this.props.p.category
-        })
+            title,
+            body,
+            owner,
+            category,
+        });
     }
 
     render() {
