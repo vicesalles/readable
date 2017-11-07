@@ -13,7 +13,8 @@ import {
     ADD_COMMENT,
     WANNA_EDIT_COMMENT,
     SET_FILTER,
-    GET_CATEGORIES
+    GET_CATEGORIES,
+    POST_EDITED
 } from '../actions/actionTypes';
 
 
@@ -107,8 +108,7 @@ function post(state = initialPostState, action) {
 
         case GET_CURRENT_POST:
             return { ...state,
-                ['currentPost']: post,
-                editing: false
+                ['currentPost']: post
             }
 
         case WANNA_EDIT_POST:
@@ -116,6 +116,12 @@ function post(state = initialPostState, action) {
                 ...state,
                 editing: true
             }
+        case POST_EDITED:
+        return{
+            ...state,
+            editing:false
+        }
+
         default:
             return state;
     }
@@ -134,7 +140,7 @@ const initialCommentState = {
 function comment(state = initialCommentState, action) {
     switch (action.type) {
         case ADD_COMMENT:
-            console.log('added comment');
+            
         case GET_COMMENTS:
             return {
                 ...state,
@@ -146,7 +152,7 @@ function comment(state = initialCommentState, action) {
                 }
             }
         case WANNA_COMMENT:
-            console.log('wanna comment');
+            
             return {
                 ...state,
                 commenting: true

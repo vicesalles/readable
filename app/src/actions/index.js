@@ -7,7 +7,6 @@ import {
     WANNA_EDIT_POST,
     VOTE_POST,
     EDIT_POST,
-    DELETE_POST,
     SET_FILTER,
     GET_COMMENTS,
     WANNA_COMMENT,
@@ -16,7 +15,8 @@ import {
     VOTE_COMMENT,
     EDIT_COMMENT,
     DELETE_COMMENT,
-    GET_CATEGORIES
+    GET_CATEGORIES,
+    POST_EDITED
 } from './actionTypes';
 
 
@@ -24,17 +24,17 @@ import {
  * CATEGORIES
  */
 
- export function getCategories(){
-    return (dispatch)=>{
-        api.getCategories().then((res)=>res.json()).then((r)=>{
+export function getCategories() {
+    return (dispatch) => {
+        api.getCategories().then((res) => res.json()).then((r) => {
             const categories = r.categories;
             dispatch({
-                type:GET_CATEGORIES,
+                type: GET_CATEGORIES,
                 categories
             })
         })
     }
- }
+}
 
 
 /**
@@ -65,7 +65,6 @@ export function getPosts(category) {
  * @param String id 
  */
 export function getCurrentPost(id) {
-
     return (dispatch) => {
         api.getPost(id).then((res) => res.json()).then((post) => {
             dispatch({
@@ -74,14 +73,15 @@ export function getCurrentPost(id) {
             })
         })
     }
-
 }
 
 /**
  * Organize posts by given Filter
  * @param Object filter 
  */
-export function sortPosts({filter}) {
+export function sortPosts({
+    filter
+}) {
     return {
         type: SORT_POSTS,
         filter
@@ -115,12 +115,9 @@ export function deletePost(id, cat) {
 
     return dispatch => {
         api.deletePost(id).then(() => {
-            //Delete all the comments fot the psot
-            api.deleteAllComments(id).then(() =>
-                //Uptade state by getting the posts again
-                dispatch(getPosts(cat))
-            )
-
+            //Delete all the post's comments
+            api.deleteAllComments(id);
+            dispatch(getPosts())
         })
     }
 }
@@ -136,7 +133,10 @@ export function wannaEditPost() {
 export function editPost(id, post) {
     return dispatch => {
         api.editPost(id, post).then((r) => {
-            dispatch(getCurrentPost(id))
+            return dispatch({
+                type: POST_EDITED
+            }).then(() => dispatch(getCurrentPost(id)))
+
         })
     }
 }

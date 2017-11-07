@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import * as h from '../../utils/helpers';
 import {FaUser,FaUserSecret,FaThumbsUp,FaThumbsDown} from 'react-icons/lib/fa/';
 import{connect} from 'react-redux';
-import {votePost} from '../../actions';
-import {getComments,getPosts,deletePost,editPost} from '../../utils/api';
+import {votePost,deletePost,wannaEditPost,getPosts,getCurrentPost} from '../../actions';
+import {getComments} from '../../utils/api';
 import {withRouter} from 'react-router-dom';
 
 class Post extends Component {
@@ -14,20 +14,27 @@ class Post extends Component {
         refresh : false
     }
 
+    /**
+     * @description Vote the given post
+     */
     submitVote = (id,vote) =>{            
         this.props.submitVote(id, vote);        
     }
 
-    delete = (id,parentId) => {
-        //Delete this comment
-        this.props.delete(id,parentId);
+    
+    /**
+     * @description Edit the given post.
+     */
+    edit = (id) =>{
+        //Enabling edition mode
+        this.props.edit()
+        //Navigate to the edition view
+        this.props.history.push(`/post/${id}/edit`);
     }
 
-    edit = () =>{
-        console.log('wanna edit');
-        this.props.edit(this.props.id);
-    }
-
+    /**
+     * @description Number of comments for this post     * 
+     */
     nComments = () =>{
         getComments(this.props.post.id).then((r)=>{
             const n = r.length
@@ -36,6 +43,8 @@ class Post extends Component {
     }
 
     componentDidMount(){
+        
+        //Getting the number of comments
         this.nComments();
     }
 
@@ -74,10 +83,10 @@ class Post extends Component {
                         <span className="spacer">
                            
                             <span className="badge badge-success">
-                                <a onClick={()=>this.edit()} className="pillbutton clicable">Edit</a>
+                                <a onClick={()=>this.edit(this.props.post.id)} className="pillbutton clicable">Edit</a>
                             </span>
                             <span className="badge badge-danger breath">
-                                <a onClick={() => this.delete(this.props.comment.id, this.props.comment.parentId)} className="pillbutton clicable">delete</a>
+                                <a onClick={() => this.props.delete(this.props.post.id, this.props.post.category)} className="pillbutton clicable">Delete</a>
                             </span>
 
                         </span>
@@ -104,8 +113,8 @@ function mapStateToProps({ post }, ownProps) {
 function mapDispatchToProps(dispatch) {
     return {
         submitVote: (id, vote) => dispatch(votePost(id, vote)),
-        delete: (id,parentId) => dispatch(deletePost(id,parentId)),
-        edit: (id)=> dispatch(editPost(id))
+        delete: (id,category) => dispatch(deletePost(id,category)),
+        edit: (id)=> dispatch(wannaEditPost())
     }
 }
 

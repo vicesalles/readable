@@ -9,8 +9,8 @@ class EditPost extends Component {
     state = {
         title: '',
         body: '',
-        owner: '',
-        category: "react"
+        author: '',
+        category: ''
     };
 
     /**
@@ -50,11 +50,11 @@ class EditPost extends Component {
     }
 
     componentDidMount() {
-        const { title, body, owner, category } = this.props.p;
+        const { title, body, author, category } = this.props.p;
         this.setState({
             title,
             body,
-            owner,
+            author,
             category,
         });
     }
@@ -90,7 +90,7 @@ class EditPost extends Component {
                                     </div>
                                     <div className="form-group">
                                         <label>Category</label>
-                                        <select disabled onChange={(e) => this.valueChanged(e, 'category')} className="form-control">
+                                        <select disabled value={this.state.category} className="form-control">
                                             <option value="react">React</option>
                                             <option value="redux">Redux</option>
                                             <option value="udacity">Udacity</option>
@@ -104,9 +104,9 @@ class EditPost extends Component {
                                     </div>
                                     <div className="form-group">
                                         <label>Author</label>
-                                        <input disabled onChange={(e) => this.valueChanged(e, 'owner')} type="text" className="form-control"
+                                        <input disabled type="text" className="form-control"
                                             placeholder="Anonymous"
-                                            value={this.state.owner} />
+                                            value={this.state.author} />
                                     </div>
                                     <button onClick={this.submitForm} className="btn btn-primary clicable">Edit</button>
                                 </form>

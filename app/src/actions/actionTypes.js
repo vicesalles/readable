@@ -7,6 +7,7 @@ export const ADD_POST = 'ADD_POST';
 export const GET_CURRENT_POST = "GET_CURRENT_POST";
 export const DELETE_POST = "DELETE_POST";
 export const EDIT_POST = "EDIT_POST";
+export const POST_EDITED ="POST_EDITED";
 export const WANNA_EDIT_POST = "WANNA_EDIT_POST";
 export const VOTE_POST = "VOTE_POST";
 export const SET_FILTER = "SET_FILTER";

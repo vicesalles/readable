@@ -34,7 +34,7 @@ class FullPost extends Component {
     edit = () => {
         this.props.edit();
     }
-
+   
 
     render() {
 
@@ -75,7 +75,7 @@ class FullPost extends Component {
                                         <a onClick={() => this.edit()} className="pillbutton clicable">Edit</a></span>
                                     &nbsp;
                                         <span className="badge badge-danger">
-                                        <a onClick={() => this.delete()} className="pillbutton clicable">delete</a></span>
+                                        <a onClick={() => this.delete()} className="pillbutton clicable">Delete</a></span>
                                 </div>
                             </div>
                         </div>

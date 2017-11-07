@@ -32,11 +32,7 @@ class Post extends Component {
             <div className="row row-space">        
                 {this.props.comment.commenting===true?<NewComment/>:''}
                 {this.props.comment.edit.editing===true?<EditComment/>:''}
-            </div>
-            <div className="row row-space">
-                <CategoriesCard />
-                <TopPosts />
-            </div>
+            </div>           
         </div>);
     }
 }

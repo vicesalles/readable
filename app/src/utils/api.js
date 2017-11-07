@@ -4,7 +4,7 @@
  * @description Gets all the avaible categories
  * @returns Array of avaible categories in the server
  */
-export function getCategories(){
+export function getCategories() {
     return fetch('http://localhost:3001/categories', {
         method: 'GET',
         headers: {
@@ -167,14 +167,16 @@ export function postComment(comment, parent) {
  * @param String id 
  */
 export function singleComment(id) {
-    console.log('api',id);
+    console.log('api', id);
     return fetch(`http://localhost:3001/comments/${id}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': 'w-want'
         }
-    }).then((r) => {return r.json()})
+    }).then((r) => {
+        return r.json()
+    })
 
 
 }
@@ -244,10 +246,12 @@ export function deleteComment(id) {
 /**
  * Delete all comments for a given parentID
  */
-export function deleteAllComments(parentId){
-    getComments(parentId).then((comments)=>{
-        comments.map((m)=>{
-           return deleteComment(m.id);
-        })
+export function deleteAllComments(parentId) {
+    getComments(parentId).then((comments) => {
+        if (comments.length > 0) {
+            comments.map((m) => {
+                return deleteComment(m.id);
+            })
+        }
     })
 }

@@ -49,6 +49,11 @@ class NewPost extends Component {
 
     }
 
+    componentDidMount(){
+        //Set the cursor in the title input field
+        this.refs.title.focus();
+    }
+
     render() {
         //Checking if post has been posted
         if (this.props.post.gotPosted) {
@@ -95,7 +100,7 @@ class NewPost extends Component {
                                     <form>
                                         <div className="form-group">
                                             <label>Post Title</label>
-                                            <input type="text" onChange={(e) => this.valueChanged(e, 'title')} className="form-control" required placeholder="Enter title"
+                                            <input type="text" ref="title" onChange={(e) => this.valueChanged(e, 'title')} className="form-control" required placeholder="Enter title"
                                                 value={this.state.title} />
                                         </div>
                                         <div className="form-group">
