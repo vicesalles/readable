@@ -30,27 +30,26 @@ class CommentsItem extends Component {
                             <span className="badge badge-success">
                                 <a onClick={() => this.props.submitVote(this.props.comment.id, 'upVote')} className="pillbutton clicable"><FaThumbsUp/></a>
                             </span>
-                            &nbsp;
-                            <span className="badge badge-danger">
+                            <span className="badge badge-danger breath">
                                 <a onClick={() => this.props.submitVote(this.props.comment.id, 'downVote')} className="pillbutton clicable"><FaThumbsDown/></a>
                             </span>
-                            <span className="badge badge-light">
-                            {this.props.comment.author? <FaUser/>:<FaUserSecret/>}
-                            &nbsp;
-                            {this.props.comment.author}
+                           <span className="badge badge-info breath">{this.props.comment.voteScore || '0'} Votes</span>
+                            <span className="spacer">
+                                    <span className="badge badge-light">
+                                        {this.props.comment.author? <FaUser/>:<FaUserSecret/>}
+                                        &nbsp;
+                                        {this.props.comment.author}
+                                    </span>
                             </span>
-                            &nbsp;
-                            <span className="badge badge-info">{this.props.comment.voteScore || '0'} Votes</span>
-                            &nbsp;
                             <span className="badge badge-light">{utils.toDate(this.props.comment.timestamp) || '17:14 01/10/17'}</span>
                         </span>
-                        |
-                    <span>
+                        
+                    <span className="spacer">
                             <span className="badge badge-success">
                                 <a onClick={()=>this.edit()} className="pillbutton clicable">Edit</a>
                             </span>
-                            &nbsp;
-                            <span className="badge badge-danger">
+                            
+                            <span className="badge badge-danger breath">
                                 <a onClick={() => this.delete(this.props.comment.id, this.props.comment.parentId)} className="pillbutton clicable">delete</a>
                             </span>
 

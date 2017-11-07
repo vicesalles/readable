@@ -27,7 +27,6 @@ import {
  export function getCategories(){
     return (dispatch)=>{
         api.getCategories().then((res)=>res.json()).then((r)=>{
-            console.log('categories ACTION',r);
             const categories = r.categories;
             dispatch({
                 type:GET_CATEGORIES,
@@ -147,7 +146,8 @@ export function votePost(id, vote) {
         api.voteApost(id, vote).then((r) =>
             dispatch({
                 type: VOTE_POST,
-                voteScore: r
+                voteScore: r,
+                id
             })
         )
     }

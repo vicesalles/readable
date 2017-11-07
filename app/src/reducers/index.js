@@ -80,12 +80,28 @@ function post(state = initialPostState, action) {
 
         case VOTE_POST:
 
+            //Getting non voted posts
+            const allLess = state.posts.filter((p)=>p.id!==action.id);
+            //Getting the voted post
+            const votedPost = state.posts.filter((p)=>p.id===action.id);
+            //Assigning new voteScore value
+            const newValue = votedPost.map((p)=>{
+                const r = Object.assign({},p,{
+                    voteScore: action.voteScore
+                })
+                return r;
+            })
+            //Creating new state Posts array
+            const updatedPosts = allLess.concat(newValue);
+
             return {
                 ...state,
+                ['posts']:updatedPosts,
                 ['currentPost']: {
                     ...state['currentPost'],
                     ['voteScore']: action.voteScore
                 }
+                
 
             }
 

@@ -19,3 +19,27 @@
 .clicable{
     cursor: pointer;
 }
+
+.postItemTitle{
+    text-decoration: none;
+    color: green
+}
+
+.postItemTitle:hover{
+    text-decoration: none;
+    color:green;
+    font-weight: bold;
+}
+
+.isWhite{
+    color:white;
+}
+
+.spacer{
+    margin-left: 0.5em; 
+    padding-left: 0.5em;
+}
+
+.breath{
+    margin-left:0.2em;
+}

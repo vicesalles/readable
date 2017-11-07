@@ -91,9 +91,9 @@ class FullPost extends Component {
                                 <div className="col-8">
                                     <a onClick={() => this.props.wannaComment()} className="btn btn-success clicable">Comment</a>
                                     &nbsp;
-                                        <a onClick={() => this.vote('upVote')} className="btn btn-success clicable">UpVote</a>
+                                        <a onClick={() => this.vote('upVote')} className="btn btn-success clicable"><FaThumbsUp/></a>
                                     &nbsp;
-                                        <a onClick={() => this.vote('downVote')} className="btn btn-success clicable">DownVote</a>
+                                        <a onClick={() => this.vote('downVote')} className="btn btn-danger clicable"><FaThumbsDown/></a>
                                 </div>
                                 <div className="col-4">
 
