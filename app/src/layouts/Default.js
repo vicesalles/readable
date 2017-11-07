@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {withRouter} from 'react-router-dom';
 import Header from '../components/Header';
 import CategoriesCard from '../components/categories/CategoriesCard';
 import TopPosts from '../components/Posts/TopPosts';
 import AllThePosts from '../components/Posts/AllThePosts';
 
-
-class Default extends Component {
-    render() {
+//Default View
+function Default(){
+   
         return (
             <div className="container-fluid">
                 <Header />
@@ -21,7 +21,7 @@ class Default extends Component {
                 </div>
             </div>
         );
-    }
+
 }
 
 export default withRouter(Default);

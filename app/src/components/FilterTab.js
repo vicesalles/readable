@@ -17,7 +17,6 @@ class FilterTab extends Component {
         const direction = this.state.direction === 'up' ? 'down' : 'up';
 
         this.setState({ direction });
-
         
         this.props.dispatch(setFilter(filter, direction));
     }

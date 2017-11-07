@@ -8,9 +8,7 @@ import * as h from '../../utils/helpers';
 
 
 class AllThePosts extends Component {
-
-    state = {}
-
+   
     /**
      * This method returns a properly parsed array of 'Post' Components
      * @param answer array
