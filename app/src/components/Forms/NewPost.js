@@ -10,7 +10,7 @@ class NewPost extends Component {
     state = {
         title: '',
         body: '',
-        owner: '',
+        author: '',
         category: "react"
     };
 
@@ -29,7 +29,7 @@ class NewPost extends Component {
         post.category = this.state.category;
         post.title = this.state.title;
         post.body = this.state.body;
-        this.state.owner === "" ? post.owner = "Anonymous" : post.owner = this.state.owner;
+        this.state.author === "" ? post.author = "Anonymous" : post.author = this.state.author;
 
         //Dispatching addPost ACTION
         this.props.dispatch(addPost(post));
@@ -114,9 +114,9 @@ class NewPost extends Component {
                                         </div>
                                         <div className="form-group">
                                             <label>Author</label>
-                                            <input onChange={(e) => this.valueChanged(e, 'owner')} type="text" className="form-control"
+                                            <input onChange={(e) => this.valueChanged(e, 'author')} type="text" className="form-control"
                                                 placeholder="Enter your name"
-                                                value={this.state.owner} />
+                                                value={this.state.author} />
                                         </div>
                                         <button onClick={this.submitForm} className="btn btn-primary clicable">Submit</button>
                                     </form>
