@@ -19,4 +19,6 @@ UI folder contains static Bootstrap materials
 
 (yarn also works as this has been created with the create-react-app starter)
 
+### KEYWORDS
 
+REACT, REDUX, BOOTSTRAP 4
