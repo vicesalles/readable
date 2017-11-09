@@ -117,9 +117,16 @@ function post(state = initialPostState, action) {
                 editing: true
             }
         case POST_EDITED:
+
+        const oPost = state.currentPost;
+        const edit = action.post;
+        const newPost = Object.assign(oPost,edit)
+
         return{
             ...state,
-            editing:false
+            editing:false,
+            ['currentPost'] :newPost
+            
         }
 
         default:

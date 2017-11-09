@@ -133,9 +133,11 @@ export function wannaEditPost() {
 export function editPost(id, post) {
     return dispatch => {
         api.editPost(id, post).then((r) => {
+            
             return dispatch({
-                type: POST_EDITED
-            }).then(() => dispatch(getCurrentPost(id)))
+                type: POST_EDITED,
+                post
+            })
 
         })
     }
