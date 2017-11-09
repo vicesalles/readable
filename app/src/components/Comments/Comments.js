@@ -19,11 +19,21 @@ class Comments extends Component {
         this.props.getComments(postId);
 
     }
+
+    nComments = ()=>{
+        const length = this.props.comments.length;
+        if(length===0){
+            return "No Comments Yet";
+        } else {
+            return `${length} Comments`; 
+        }
+    }
+
     render() {
         return (
             <div className="col">
                 <div className="card">
-                    <div className="card-header">Comments</div>
+                    <div className="card-header">{this.nComments()}</div>
                     <ul className="list-group list-group-flush">
                         {this.parseComments(this.props.comments)}
                     </ul>
