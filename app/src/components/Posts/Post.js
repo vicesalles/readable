@@ -54,7 +54,7 @@ class Post extends Component {
             <div className="list-group-item list-group-item-action">
 
                 <div className="row">
-                    <Link className="postItemTitle" to={'/post/' + this.props.post.id}>  
+                    <Link className="postItemTitle" to={`/${this.props.post.category}/${this.props.post.id}`}>  
                         <div className="container clicable">{this.props.post.title}</div>
                     </Link>
                 </div>
