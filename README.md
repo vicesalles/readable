@@ -6,16 +6,14 @@ This is a React-Redux project part of my React nano-degree at Udacity. With this
 
 ## USAGE
 
-It needs a simple dummy server to work. Server can be found here: [node dummy server]
+Follow next steps for running the app locally:
 
-After installing and set up running the server, just follow the next steps with this app:
-
-1) ENTER APP FOLTER AND RUN NPM INSTALL
-2) ENTER SERVER FOLDER RUN NPM INSTALL
-3) START THE SERVER NPM START
+1) ENTER APP FOLDER AND RUN NPM INSTALL
+2) ENTER SERVER FOLDER RUN NPM INSTALL 
+3) START THE SERVER NPM START 
 4) START THE APP NPM START
 
-UI folder contains static Bootstrap materials
+UI folder contains static Bootstrap materials.
 
 (yarn also works as this has been created with the create-react-app starter)
 
