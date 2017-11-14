@@ -123,9 +123,11 @@ export function deletePost(id, cat) {
 }
 
 // Inits UI for editing a Post
-export function wannaEditPost() {
+export function wannaEditPost(post) {
+    
     return {
-        type: WANNA_EDIT_POST
+        type: WANNA_EDIT_POST,
+        post
     }
 }
 

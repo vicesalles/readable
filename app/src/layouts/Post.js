@@ -18,7 +18,7 @@ class Post extends Component {
     componentDidMount() {
 
         const postId = this.props.match.params.id;
-        this.props.getCurrentPost(postId);
+        this.props.getCurrentPost(postId);        
                 
     }
 
@@ -26,16 +26,17 @@ class Post extends Component {
         return (<div className="container-fluid">
             <Header />
             <FullPost />
-            <div className="row row-space">
+            {this.props.post.currentPost!==""?
+            <div></div>:<div className="row row-space">
                 <Comments />               
-            </div>
+            </div>}
             <div className="row row-space">        
                 {this.props.comment.commenting===true?<NewComment/>:''}
                 {this.props.comment.edit.editing===true?<EditComment/>:''}
             </div>    
             <div className="row">
                     <CategoriesCard />                    
-                </div>       
+            </div>       
         </div>);
     }
 }

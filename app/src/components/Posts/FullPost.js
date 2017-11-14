@@ -32,7 +32,7 @@ class FullPost extends Component {
     }
 
     edit = () => {
-        this.props.edit();
+        this.props.edit(this.props.post);
     }
    
 
@@ -128,7 +128,7 @@ function mapDispatchToProps(dispatch) {
         submitVote: (id, vote) => dispatch(votePost(id, vote)),
         wannaComment: () => dispatch(wannaComment()),
         delete: (id, cat) => dispatch(deletePost(id, cat)),
-        edit: () => dispatch(wannaEditPost())
+        edit: (post) => dispatch(wannaEditPost(post))
     }
 }
 

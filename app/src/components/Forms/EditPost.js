@@ -8,9 +8,7 @@ class EditPost extends Component {
     //State is used for handling Form
     state = {
         title: '',
-        body: '',
-        author: '',
-        category: ''
+        body: ''
     };
 
     /**
@@ -29,7 +27,6 @@ class EditPost extends Component {
 
         post.title = this.state.title;
         post.body = this.state.body;
-
 
         //Dispatching addPost ACTION
         this.props.dispatch(editPost(id, post));
@@ -50,18 +47,16 @@ class EditPost extends Component {
     }
 
     componentDidMount() {
-        const { title, body, author, category } = this.props.p;
+        const { title, body } = this.props.p;
         this.setState({
             title,
-            body,
-            author,
-            category,
+            body           
         });
     }
-
+    
+   
     render() {
-        //Checking if post has been posted
-
+        
         //Showing Posting Form
         return (
 
@@ -73,7 +68,7 @@ class EditPost extends Component {
                     <div className="card-header">
                         <div className="row">
                             <div className="col-10">
-                                <h1>New Post</h1>
+                                <h1>Edit Post</h1>
                             </div>
                         </div>
                     </div>
@@ -85,12 +80,12 @@ class EditPost extends Component {
                                 <form>
                                     <div className="form-group">
                                         <label>Post Title</label>
-                                        <input type="text" onChange={(e) => this.valueChanged(e, 'title')} className="form-control" required placeholder="Enter title"
+                                        <input ref="title" type="text" onChange={(e) => this.valueChanged(e, 'title')} className="form-control" required placeholder="Enter title"
                                             value={this.state.title} />
                                     </div>
                                     <div className="form-group">
                                         <label>Category</label>
-                                        <select disabled value={this.state.category} className="form-control">
+                                        <select disabled value={this.props.p.category} className="form-control">
                                             <option value="react">React</option>
                                             <option value="redux">Redux</option>
                                             <option value="udacity">Udacity</option>
@@ -106,7 +101,7 @@ class EditPost extends Component {
                                         <label>Author</label>
                                         <input disabled type="text" className="form-control"
                                             placeholder="Anonymous"
-                                            value={this.state.author} />
+                                            value={this.props.p.author} />
                                     </div>
                                     <button onClick={this.submitForm} className="btn btn-primary clicable">Edit</button>
                                 </form>
@@ -132,7 +127,7 @@ class EditPost extends Component {
 }
 
 function mapStateToProps({ post }) {
-    const p = post.currentPost;
+    const p = post.currentPost;   
     return { p }
 }
 

@@ -26,10 +26,12 @@ class Post extends Component {
      * @description Edit the given post.
      */
     edit = (id) =>{
+        
         //Enabling edition mode
-        this.props.edit()
+        this.props.edit(this.props.post)
+        const cat = this.props.post.category
         //Navigate to the edition view
-        this.props.history.push(`/post/${id}/edit`);
+        this.props.history.push(`/${cat}/${id}`);
     }
 
     /**
@@ -114,7 +116,8 @@ function mapDispatchToProps(dispatch) {
     return {
         submitVote: (id, vote) => dispatch(votePost(id, vote)),
         delete: (id,category) => dispatch(deletePost(id,category)),
-        edit: (id)=> dispatch(wannaEditPost())
+        edit: (post)=> dispatch(wannaEditPost(post)),
+        getPost: (id)=> dispatch(getCurrentPost(id))
     }
 }
 

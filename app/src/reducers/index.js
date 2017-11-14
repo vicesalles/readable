@@ -57,7 +57,8 @@ function post(state = initialPostState, action) {
                 ...state,
                 ['posts']: posts,
                 ['category']: category,
-                ['gotPosted']: false
+                ['gotPosted']: false,
+                ['editing']:false
             }
 
         case SORT_POSTS:
@@ -114,7 +115,8 @@ function post(state = initialPostState, action) {
         case WANNA_EDIT_POST:
             return {
                 ...state,
-                editing: true
+                editing: true,
+                ['currentPost']:action.post
             }
         case POST_EDITED:
 

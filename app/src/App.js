@@ -14,9 +14,9 @@ function App() {
 
       <Switch>
         <Route path="/" exact component={Default} />
+        <Route path="/edit/:id" exact component={Edit} />
         <Route path="/category/:id" component={Category} />
-        <Route path="/:category/:id" component={Post} />
-        <Route path="/edit/:id" component={Edit} />
+        <Route path="/:category/:id" exact component={Post} />       
         <Route component={Broken} />
       </Switch>
 
