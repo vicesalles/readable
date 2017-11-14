@@ -29,6 +29,10 @@ class AllThePosts extends Component {
         this.props.setPosts(this.props.match.params.id || "");
     }
 
+    componentWillReceiveProps(){
+        this.props.setPosts(this.props.match.params.id || "");
+    }
+
     render() {
         return (
             <div className="col">
@@ -69,11 +73,8 @@ class AllThePosts extends Component {
 }
 
 function mapStateToProps({ post }) {
-
     const getPosts = h.filter(post.posts, post.filter.f, post.filter.d, 0);
-
     const posts = getPosts.filter((p) => p.deleted === false);
-
     return { posts }
 }
 
