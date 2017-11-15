@@ -26,10 +26,10 @@ class Post extends Component {
         return (<div className="container-fluid">
             <Header />
             <FullPost />
-            {this.props.post.currentPost!==""?
-            <div></div>:<div className="row row-space">
+            {this.props.post.currentPost.error===undefined?
+            <div className="row row-space">
                 <Comments />               
-            </div>}
+            </div>:<div></div>}
             <div className="row row-space">        
                 {this.props.comment.commenting===true?<NewComment/>:''}
                 {this.props.comment.edit.editing===true?<EditComment/>:''}
@@ -41,7 +41,7 @@ class Post extends Component {
     }
 }
 
-function mapStateToProps({ post, comment }) {
+function mapStateToProps({ post, comment }) {   
     return { post, comment }
 }
 
