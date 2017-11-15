@@ -8,9 +8,9 @@ export default class Category extends Component {
     render() {
         return (
             <div className="container-fluid">
-                <Header subtitle={`Category ${this.props.match.params.id}`} />
+                <Header subtitle={`Category ${this.props.match.params.category}`} />
                 <div className="row">
-                    <AllThePosts title={`Category ${this.props.match.params.id}`} />
+                    <AllThePosts title={`Category ${this.props.match.params.category}`} />
                 </div>
                 <div className="row row-space">
                     <CategoriesCard />

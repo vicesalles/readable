@@ -26,11 +26,11 @@ class AllThePosts extends Component {
     }
 
     componentDidMount() {
-        this.props.setPosts(this.props.match.params.id || "");
+        this.props.setPosts(this.props.match.params.category || "");
     }
 
     componentWillReceiveProps(){
-        this.props.setPosts(this.props.match.params.id || "");
+        this.props.setPosts(this.props.match.params.category || "");
     }
 
     render() {
